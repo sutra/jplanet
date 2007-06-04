@@ -1,0 +1,122 @@
+/* body */
+
+body {
+	margin: 0px;
+	padding: 0px;
+	background-color: white;
+	color: black;
+}
+
+/* header */
+
+#banner {
+	background: url('img/hdr-planet.jpg') no-repeat;
+	background-color: #9db8d2;
+	background-position: right;
+	border-bottom: 1px solid #807d74;
+	height: 48px;
+}
+
+#logo {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+/*	background: url('http://www.gnome.org/img/logo/text-64') no-repeat;*/
+	width: 64px;
+	height: 64px;
+}
+
+#logo img {
+	border: 0px;
+	width: 64px;
+	height: 64px;
+}
+
+#hdrNav {
+	margin-top: 6px;
+	margin-left: 84px;
+	margin-right: 190px;
+	padding-right: 3em;
+	font-size: small;
+}
+
+#hdrNav a {
+	color: #000000;
+}
+
+#body, #page {
+	margin: 0 190px 0 0;
+	padding: 1.5em 3em 0em 1em;
+}
+
+#body *:first-child, #page *:first-child {
+	margin-top: 0;
+}
+
+#copyright {
+	clear: both;
+	padding-bottom: 1em;
+	text-align: center;
+	font-size: small;
+	color: #aaaaaa;
+}
+
+#copyright a {
+	color: #aaaaff;
+}
+
+#copyright a:visited {
+	color: #ffaaaa;
+}
+
+
+/* SIDEBAR */
+
+#sidebar {
+	position: absolute;
+	top: 49px;
+	right: 0px;
+	/*width: 210px;*/
+	border-left: 1px solid #ffffff;
+	background-color: #eeeeee;
+}
+
+#sidebar div.section {
+	width: 190px;
+	padding: 1em;
+	border-top: 1px solid #ffffff;
+	border-bottom: 1px solid #d9d9d9;
+}
+
+#sidebar div.section h3 {
+	font-weight: bold;
+	font-size: 110%;
+}
+
+#sidebar *:first-child {
+	margin-top: 0;
+}
+
+#sidebar *:last-child {
+	margin-bottom: 0;
+}
+
+#sidebar div.section ul {
+	padding: 0px;
+	margin: 0px;
+	list-style-type: none;
+}
+
+#sidebar div.section ul ul {
+	padding-left: 1.5em;
+	list-style-type: square;
+}
+
+#sidebar div.section li {
+	padding: 0px;
+	margin: 0px;
+}
+
+#sidebar div.section p {
+	font-size: small;
+}
