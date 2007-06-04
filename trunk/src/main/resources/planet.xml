@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>Feeds configuration.</comment>
+	<entry key="feeds">
+		<![CDATA[
+		http://feeds.feedburner.com/openidplanet
+		http://idself.cn/atom/1
+		]]>
+	</entry>
+	<entry key="title">JPlanet</entry>
+	<entry key="description">
+		JPlanet is an awesome 'river of news' feed reader. It downloads
+		news feeds published by web sites and aggregates their content
+		together into a single combined feed, latest news first.
+	</entry>
+	<entry key="link">http://redv.com/jplanet</entry>
+</properties>
