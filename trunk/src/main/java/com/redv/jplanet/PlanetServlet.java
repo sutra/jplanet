@@ -5,9 +5,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.InvalidPropertiesFormatException;
+import java.util.Date;
 import java.util.List;
-import java.util.Properties;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -20,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.sun.syndication.feed.synd.SyndContent;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.feed.synd.SyndFeedImpl;
@@ -46,9 +46,9 @@ public class PlanetServlet extends HttpServlet {
 
 	private Timer timer = new Timer();
 
-	private String[] feeds;
+	private Planet planet;
 
-	private Properties prop = new Properties();
+	private Date updateDate;
 
 	private List<SyndEntry> syndEntries = new ArrayList<SyndEntry>();
 
@@ -59,19 +59,23 @@ public class PlanetServlet extends HttpServlet {
 		super.init();
 
 		try {
-			prop.loadFromXML(getClass().getResourceAsStream("/planet.xml"));
-		} catch (InvalidPropertiesFormatException e) {
-			throw new ServletException(e);
-		} catch (IOException e) {
+			planet = new ConfigReader().read();
+		} catch (Exception e) {
 			throw new ServletException(e);
 		}
-		feeds = prop.getProperty("feeds").toString().split("\n");
+
+		if (log.isDebugEnabled()) {
+			for (Subscription subscription : planet.getSubscriptions()) {
+				log.debug(subscription.getFeedUrl());
+			}
+		}
 
 		// set timer to get feeds
 		timer.schedule(new TimerTask() {
 
 			@Override
 			public void run() {
+				updateDate = new Date();
 				fetchFeeds();
 			}
 		}, 0, 1000 * 60 * 10);
@@ -88,7 +92,8 @@ public class PlanetServlet extends HttpServlet {
 		String feedType = req.getParameter("feedType");
 
 		if (feedType == null) {
-			req.setAttribute("title", prop.getProperty("title"));
+			req.setAttribute("planet", planet);
+			req.setAttribute("updateDate", updateDate);
 			req.setAttribute("entries", entries);
 			String v = "/planet.jsp";
 			RequestDispatcher rd = getServletContext().getRequestDispatcher(v);
@@ -107,9 +112,9 @@ public class PlanetServlet extends HttpServlet {
 	private SyndFeed buildFeed(String feedType) {
 		SyndFeed feed = new SyndFeedImpl();
 		feed.setFeedType(feedType);
-		feed.setTitle(prop.getProperty("title"));
-		feed.setDescription(prop.getProperty("description"));
-		feed.setLink(prop.getProperty("link"));
+		feed.setTitle(planet.getTitle());
+		feed.setDescription(planet.getDescription());
+		feed.setLink(planet.getSiteUrl());
 		feed.setEntries(syndEntries);
 		return feed;
 	}
@@ -117,41 +122,19 @@ public class PlanetServlet extends HttpServlet {
 	private synchronized void fetchFeeds() {
 		List<SyndEntry> fetchingSyndEntries = new ArrayList<SyndEntry>();
 		List<FeedContent> fetchingEntries = new ArrayList<FeedContent>();
-		for (String feedUrl : feeds) {
-			String trimedFeedUrl = feedUrl.trim();
-			if (trimedFeedUrl.length() == 0) {
+		for (Subscription subscription : planet.getSubscriptions()) {
+			String feedUrl = subscription.getFeedUrl();
+			if (feedUrl.length() == 0) {
 				continue;
 			}
 			try {
-				retrieveFeed(fetchingSyndEntries, fetchingEntries,
-						trimedFeedUrl);
+				retrieveFeed(fetchingSyndEntries, fetchingEntries, feedUrl);
 			} catch (Exception e) {
 				log.error("error while reading feed: " + feedUrl, e);
 			}
 		}
-		Collections.sort(fetchingSyndEntries, new Comparator<SyndEntry>() {
 
-			public int compare(SyndEntry o1, SyndEntry o2) {
-				if (o1 == null || o2 == null || o1.getPublishedDate() == null
-						|| o2.getPublishedDate() == null) {
-					return 0;
-				}
-				return -o1.getPublishedDate().compareTo(o2.getPublishedDate());
-			}
-		});
-		Collections.sort(fetchingEntries, new Comparator<FeedContent>() {
-
-			public int compare(FeedContent o1, FeedContent o2) {
-				if (o1 == null || o2 == null || o1.getPost() == null
-						|| o2.getPost() == null
-						|| o1.getPost().getPublishedDate() == null
-						|| o2.getPost().getPublishedDate() == null) {
-					return 0;
-				}
-				return -o1.getPost().getPublishedDate().compareTo(
-						o2.getPost().getPublishedDate());
-			}
-		});
+		sort(fetchingSyndEntries, fetchingEntries);
 
 		this.syndEntries = fetchingSyndEntries;
 		this.entries = fetchingEntries;
@@ -172,6 +155,20 @@ public class PlanetServlet extends HttpServlet {
 		List<SyndEntry> syndEntries = inFeed.getEntries();
 		fetchingSyndEntries.addAll(syndEntries);
 		for (SyndEntry syndEntry : syndEntries) {
+			if (log.isDebugEnabled()) {
+				log.debug("description: " + syndEntry.getDescription());
+				log.debug("content: " + syndEntry.getContents().get(0));
+			}
+			if (syndEntry.getPublishedDate() == null) {
+				syndEntry.setPublishedDate(syndEntry.getUpdatedDate());
+			}
+			if (syndEntry.getDescription() == null) {
+				if (syndEntry.getContents().size() > 0) {
+					syndEntry.setDescription((SyndContent) syndEntry
+							.getContents().get(0));
+				}
+			}
+
 			FeedContent fc = new FeedContent();
 			fc.setPost(syndEntry);
 			fc.setSiteName(inFeed.getTitle());
@@ -180,5 +177,35 @@ public class PlanetServlet extends HttpServlet {
 			fc.setFullname(inFeed.getAuthor());
 			fetchingEntries.add(fc);
 		}
+	}
+
+	private void sort(List<SyndEntry> fetchingSyndEntries,
+			List<FeedContent> fetchingEntries) {
+		Collections.sort(fetchingSyndEntries, new Comparator<SyndEntry>() {
+
+			public int compare(SyndEntry o1, SyndEntry o2) {
+				if (o1 == null || FeedContent.findDate(o1) == null) {
+					return 1;
+				} else if (o2 == null || FeedContent.findDate(o2) == null) {
+					return -1;
+				}
+				return -FeedContent.findDate(o1).compareTo(
+						FeedContent.findDate(o2));
+			}
+		});
+		Collections.sort(fetchingEntries, new Comparator<FeedContent>() {
+
+			public int compare(FeedContent o1, FeedContent o2) {
+				if (o1 == null || o1.getPost() == null
+						|| FeedContent.findDate(o1.getPost()) == null) {
+					return 1;
+				} else if (o2 == null || o2.getPost() == null
+						|| FeedContent.findDate(o2.getPost()) == null) {
+					return -1;
+				}
+				return -FeedContent.findDate(o1.getPost()).compareTo(
+						FeedContent.findDate(o2.getPost()));
+			}
+		});
 	}
 }
