@@ -4,7 +4,12 @@
 package com.redv.jplanet;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import com.sun.syndication.feed.synd.SyndContent;
 import com.sun.syndication.feed.synd.SyndEntry;
 
 /**
@@ -12,6 +17,8 @@ import com.sun.syndication.feed.synd.SyndEntry;
  * 
  */
 public class FeedContent {
+	private static final Log log = LogFactory.getLog(FeedContent.class);
+
 	// site
 	private String siteName;
 
@@ -27,19 +34,13 @@ public class FeedContent {
 	private SyndEntry post;
 
 	public String getTime() {
-		if (this.post == null || this.post.getPublishedDate() == null) {
-			return null;
-		}
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		return dateFormat.format(this.post.getPublishedDate());
+		return dateFormat.format(findDate(post));
 	}
 
 	public String getDate() {
-		if (this.post == null || this.post.getPublishedDate() == null) {
-			return null;
-		}
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		return dateFormat.format(this.post.getPublishedDate());
+		return dateFormat.format(findDate(post));
 	}
 
 	/**
@@ -132,4 +133,37 @@ public class FeedContent {
 		this.post = post;
 	}
 
+	/**
+	 * @return datetime
+	 */
+	public Date getDatetime() {
+		return findDate(post);
+	}
+
+	public SyndContent getDescription() {
+		if (post.getDescription() != null) {
+			return post.getDescription();
+		} else if (post.getContents().size() > 0) {
+			return (SyndContent) post.getContents().get(0);
+		}
+		return null;
+	}
+
+	public static Date findDate(SyndEntry se) {
+		if (se == null) {
+			return null;
+		}
+		Date date = null;
+		if (log.isDebugEnabled()) {
+			log.debug("published: " + se.getPublishedDate());
+			log.debug("updated: " + se.getUpdatedDate());
+		}
+		if (se.getPublishedDate() == null) {
+			date = se.getPublishedDate();
+		}
+		if (date == null) {
+			date = se.getUpdatedDate();
+		}
+		return date;
+	}
 }
