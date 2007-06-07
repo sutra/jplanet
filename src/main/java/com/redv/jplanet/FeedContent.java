@@ -34,13 +34,21 @@ public class FeedContent {
 	private SyndEntry post;
 
 	public String getTime() {
+		Date date = findDate(post);
+		if (date == null) {
+			return null;
+		}
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		return dateFormat.format(findDate(post));
+		return dateFormat.format(date);
 	}
 
 	public String getDate() {
+		Date date = findDate(post);
+		if (date == null) {
+			return null;
+		}
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		return dateFormat.format(findDate(post));
+		return dateFormat.format(date);
 	}
 
 	/**
