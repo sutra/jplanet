@@ -73,7 +73,7 @@ public class ConfigReader {
 				if (field.equals("title")) {
 					subscription.setTitle(p.getProperty(key).trim());
 				} else if (field.equals("description")) {
-					subscription.setSiteUrl(p.getProperty(key).trim());
+					subscription.setDescription(p.getProperty(key).trim());
 				} else if (field.equals("feedUrl")) {
 					subscription.setFeedUrl(p.getProperty(key).trim());
 				} else if (field.equals("siteUrl")) {
