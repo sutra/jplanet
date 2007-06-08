@@ -3,7 +3,7 @@
  */
 package com.redv.jplanet;
 
-import java.text.SimpleDateFormat;
+import java.text.DateFormat;
 import java.util.Date;
 
 import org.apache.commons.logging.Log;
@@ -17,6 +17,7 @@ import com.sun.syndication.feed.synd.SyndEntry;
  * 
  */
 public class FeedContent {
+	@SuppressWarnings("unused")
 	private static final Log log = LogFactory.getLog(FeedContent.class);
 
 	// site
@@ -33,23 +34,9 @@ public class FeedContent {
 	// post
 	private SyndEntry post;
 
-	public String getTime() {
-		Date date = findDate(post);
-		if (date == null) {
-			return null;
-		}
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		return dateFormat.format(date);
-	}
+	private DateFormat groupingDateFormat;
 
-	public String getDate() {
-		Date date = findDate(post);
-		if (date == null) {
-			return null;
-		}
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		return dateFormat.format(date);
-	}
+	private DateFormat postDateFormat;
 
 	/**
 	 * @return fullname
@@ -148,6 +135,36 @@ public class FeedContent {
 		return findDate(post);
 	}
 
+	/**
+	 * @return groupingDateFormat
+	 */
+	public DateFormat getGroupingDateFormat() {
+		return groupingDateFormat;
+	}
+
+	/**
+	 * @param groupingDateFormat
+	 *            要设置的 groupingDateFormat
+	 */
+	public void setGroupingDateFormat(DateFormat groupingDateFormat) {
+		this.groupingDateFormat = groupingDateFormat;
+	}
+
+	/**
+	 * @return postDateFormat
+	 */
+	public DateFormat getPostDateFormat() {
+		return postDateFormat;
+	}
+
+	/**
+	 * @param postDateFormat
+	 *            要设置的 postDateFormat
+	 */
+	public void setPostDateFormat(DateFormat postDateFormat) {
+		this.postDateFormat = postDateFormat;
+	}
+
 	public SyndContent getDescription() {
 		if (post.getDescription() != null) {
 			return post.getDescription();
@@ -157,21 +174,16 @@ public class FeedContent {
 		return null;
 	}
 
+	public String getGroupingDate() {
+		return this.groupingDateFormat.format(this.getDatetime());
+	}
+
+	public String getPostDate() {
+		return this.postDateFormat.format(this.getDatetime());
+	}
+
 	public static Date findDate(SyndEntry se) {
-		if (se == null) {
-			return null;
-		}
-		Date date = null;
-		if (log.isDebugEnabled()) {
-			log.debug("published: " + se.getPublishedDate());
-			log.debug("updated: " + se.getUpdatedDate());
-		}
-		if (se.getPublishedDate() == null) {
-			date = se.getPublishedDate();
-		}
-		if (date == null) {
-			date = se.getUpdatedDate();
-		}
-		return date;
+		return se == null ? null : (se.getPublishedDate() != null ? se
+				.getPublishedDate() : se.getUpdatedDate());
 	}
 }

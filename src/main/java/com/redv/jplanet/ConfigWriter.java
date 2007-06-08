@@ -20,9 +20,13 @@ public class ConfigWriter {
 		p.setProperty("title", planet.getTitle());
 		p.setProperty("description", planet.getDescription());
 		p.setProperty("siteUrl", planet.getSiteUrl());
+		p.setProperty("language", planet.getLanguage());
 		p.setProperty("adminName", planet.getAdminName());
 		p.setProperty("adminEmail", planet.getAdminEmail());
 		p.setProperty("mailSubject", planet.getMailSubject());
+		p.setProperty("groupingDateFormat", planet.getGroupingDateFormat());
+		p.setProperty("postDateFormat", planet.getPostDateFormat());
+		p.setProperty("updatePeriod", String.valueOf(planet.getUpdatePeriod()));
 		OutputStream os = new FileOutputStream(new File(ConfigReader
 				.getDataDir(), "planet.xml"));
 		p.storeToXML(os, "JPlanet configuration.", "UTF-8");

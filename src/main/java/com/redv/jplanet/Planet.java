@@ -23,13 +23,24 @@ public class Planet implements Serializable {
 
 	private String siteUrl;
 
+	private String language;
+
 	private String adminName;
 
 	private String adminEmail;
 
 	private String mailSubject;
 
+	private String groupingDateFormat;
+
+	private String postDateFormat;
+
 	private Set<Subscription> subscriptions;
+
+	/**
+	 * In second.
+	 */
+	private long updatePeriod;
 
 	/**
 	 * @return adminEmail
@@ -92,6 +103,21 @@ public class Planet implements Serializable {
 	}
 
 	/**
+	 * @return language
+	 */
+	public String getLanguage() {
+		return language;
+	}
+
+	/**
+	 * @param language
+	 *            要设置的 language
+	 */
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
+	/**
 	 * @return subscriptions
 	 */
 	public Set<Subscription> getSubscriptions() {
@@ -134,6 +160,51 @@ public class Planet implements Serializable {
 	 */
 	public void setMailSubject(String mailSubject) {
 		this.mailSubject = mailSubject;
+	}
+
+	/**
+	 * @return groupingDateFormat
+	 */
+	public String getGroupingDateFormat() {
+		return groupingDateFormat;
+	}
+
+	/**
+	 * @param groupingDateFormat
+	 *            要设置的 groupingDateFormat
+	 */
+	public void setGroupingDateFormat(String groupingDateFormat) {
+		this.groupingDateFormat = groupingDateFormat;
+	}
+
+	/**
+	 * @return postDateFormat
+	 */
+	public String getPostDateFormat() {
+		return postDateFormat;
+	}
+
+	/**
+	 * @param postDateFormat
+	 *            要设置的 postDateFormat
+	 */
+	public void setPostDateFormat(String postDateFormat) {
+		this.postDateFormat = postDateFormat;
+	}
+
+	/**
+	 * @return updatePeriod 单位秒
+	 */
+	public long getUpdatePeriod() {
+		return updatePeriod;
+	}
+
+	/**
+	 * @param updatePeriod
+	 *            要设置的 updatePeriod，单位秒
+	 */
+	public void setUpdatePeriod(long updatePeriod) {
+		this.updatePeriod = updatePeriod;
 	}
 
 }

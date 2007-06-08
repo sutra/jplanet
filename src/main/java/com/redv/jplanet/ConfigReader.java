@@ -41,10 +41,16 @@ public class ConfigReader {
 			planet.setTitle(p.getProperty("title").trim());
 			planet.setDescription(p.getProperty("description").trim());
 			planet.setSiteUrl(p.getProperty("siteUrl").trim());
+			planet.setLanguage(p.getProperty("language").trim());
 			planet.setAdminName(p.getProperty("adminName").trim());
 			planet.setAdminEmail(p.getProperty("adminEmail").trim());
 			planet.setMailSubject(p.getProperty("mailSubject").trim());
+			planet.setGroupingDateFormat(p.getProperty("groupingDateFormat")
+					.trim());
+			planet.setPostDateFormat(p.getProperty("postDateFormat").trim());
 			planet.setSubscriptions(this.readSubscription());
+			planet.setUpdatePeriod(Long.parseLong(p.getProperty("updatePeriod")
+					.trim()));
 		} finally {
 			is.close();
 		}

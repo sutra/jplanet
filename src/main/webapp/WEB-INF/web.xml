@@ -3,17 +3,23 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 	<display-name>JPlanet</display-name>
+	<servlet>
+		<servlet-name>planet</servlet-name>
+		<servlet-class>com.redv.jplanet.PlanetServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
 	<filter>
 		<filter-name>UrlRewriteFilter</filter-name>
 		<filter-class>
 			org.tuckey.web.filters.urlrewrite.UrlRewriteFilter
 		</filter-class>
 	</filter>
-	<servlet>
+
+	<servlet-mapping>
 		<servlet-name>planet</servlet-name>
-		<servlet-class>com.redv.jplanet.PlanetServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
+		<url-pattern>/aggregator</url-pattern>
+	</servlet-mapping>
+
 	<filter-mapping>
 		<filter-name>UrlRewriteFilter</filter-name>
 		<url-pattern>/rss</url-pattern>
@@ -22,8 +28,8 @@
 		<filter-name>UrlRewriteFilter</filter-name>
 		<url-pattern>/atom</url-pattern>
 	</filter-mapping>
-	<servlet-mapping>
-		<servlet-name>planet</servlet-name>
-		<url-pattern>/aggregator</url-pattern>
-	</servlet-mapping>
+	<filter-mapping>
+		<filter-name>UrlRewriteFilter</filter-name>
+		<url-pattern>*.xml</url-pattern>
+	</filter-mapping>
 </web-app>

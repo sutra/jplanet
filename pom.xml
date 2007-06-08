@@ -66,6 +66,12 @@
 			<artifactId>urlrewritefilter</artifactId>
 			<version>3.0.4</version>
 		</dependency>
+		<dependency>
+			<groupId>opensymphony</groupId>
+			<artifactId>oscache</artifactId>
+			<version>2.3</version>
+			<type>jar</type>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>jplanet</finalName>
