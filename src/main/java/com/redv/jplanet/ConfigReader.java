@@ -28,7 +28,7 @@ public class ConfigReader {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-		return new File(p.getProperty("data.dir"));
+		return new File(p.getProperty("conf.dir"));
 	}
 
 	public Planet read() throws InvalidPropertiesFormatException, IOException {
