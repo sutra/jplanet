@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+	<comment>Planet subscriptions configuration.</comment>
+	<entry key="1.title">OpenID 中文</entry>
+	<entry key="1.description">OpenID 中文</entry>
+	<entry key="1.siteUrl">http://www.openidchina.com.cn/</entry>
+	<entry key="1.feedUrl">
+		http://feeds.feedburner.com/openidplanet
+	</entry>
+
+	<entry key="2.title">IDSelf</entry>
+	<entry key="2.description">IDSelf</entry>
+	<entry key="2.siteUrl">http://idself.cn/</entry>
+	<entry key="2.feedUrl">http://feeds.feedburner.com/idself</entry>
+</properties>
