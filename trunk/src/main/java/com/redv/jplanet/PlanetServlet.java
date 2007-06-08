@@ -2,6 +2,8 @@ package com.redv.jplanet;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -48,9 +50,11 @@ public class PlanetServlet extends HttpServlet {
 
 	private Planet planet;
 
-	private Date updateDate;
+	private DateFormat groupingDateFormat;
 
-	private List<SyndEntry> syndEntries = new ArrayList<SyndEntry>();
+	private DateFormat postDateFormat;
+
+	private Date updateDate;
 
 	private List<FeedContent> entries = new ArrayList<FeedContent>();
 
@@ -60,6 +64,10 @@ public class PlanetServlet extends HttpServlet {
 
 		try {
 			planet = new ConfigReader().read();
+			this.groupingDateFormat = new SimpleDateFormat(planet
+					.getGroupingDateFormat());
+			this.postDateFormat = new SimpleDateFormat(planet
+					.getPostDateFormat());
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}
@@ -68,6 +76,8 @@ public class PlanetServlet extends HttpServlet {
 			for (Subscription subscription : planet.getSubscriptions()) {
 				log.debug(subscription.getFeedUrl());
 			}
+			log.debug(String.format("update period(seconds): %1$d",
+					1000 * planet.getUpdatePeriod()));
 		}
 
 		// set timer to get feeds
@@ -78,7 +88,7 @@ public class PlanetServlet extends HttpServlet {
 				updateDate = new Date();
 				fetchFeeds();
 			}
-		}, 0, 1000 * 60 * 10);
+		}, 0, planet.getUpdatePeriod());
 	}
 
 	@Override
@@ -92,20 +102,31 @@ public class PlanetServlet extends HttpServlet {
 		String feedType = req.getParameter("feedType");
 
 		if (feedType == null) {
-			req.setAttribute("planet", planet);
-			req.setAttribute("updateDate", updateDate);
-			req.setAttribute("entries", entries);
-			String v = "/planet.jsp";
-			RequestDispatcher rd = getServletContext().getRequestDispatcher(v);
-			rd.forward(req, resp);
+			processHtml(req, resp);
 		} else {
-			resp.setContentType("text/xml; charset=UTF-8");
-			SyndFeedOutput output = new SyndFeedOutput();
-			try {
-				output.output(this.buildFeed(feedType), resp.getWriter());
-			} catch (FeedException e) {
-				throw new ServletException(e);
-			}
+			processFeed(feedType, resp);
+		}
+	}
+
+	private void processHtml(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		req.setAttribute("planet", planet);
+		req.setAttribute("updateDate", updateDate);
+		req.setAttribute("entries", entries);
+		String v = "/planet.jsp";
+		RequestDispatcher rd = getServletContext().getRequestDispatcher(v);
+
+		rd.forward(req, resp);
+	}
+
+	private void processFeed(String feedType, HttpServletResponse resp)
+			throws IOException, ServletException {
+		resp.setContentType("text/xml; charset=UTF-8");
+		SyndFeedOutput output = new SyndFeedOutput();
+		try {
+			output.output(this.buildFeed(feedType), resp.getWriter());
+		} catch (FeedException e) {
+			throw new ServletException(e);
 		}
 	}
 
@@ -115,7 +136,13 @@ public class PlanetServlet extends HttpServlet {
 		feed.setTitle(planet.getTitle());
 		feed.setDescription(planet.getDescription());
 		feed.setLink(planet.getSiteUrl());
-		feed.setEntries(syndEntries);
+		feed.setLanguage(planet.getLanguage());
+		feed.setPublishedDate(this.updateDate);
+		List<SyndEntry> entries = new ArrayList<SyndEntry>();
+		for (FeedContent fc : this.entries) {
+			entries.add(fc.getPost());
+		}
+		feed.setEntries(entries);
 		return feed;
 	}
 
@@ -134,9 +161,8 @@ public class PlanetServlet extends HttpServlet {
 			}
 		}
 
-		sort(fetchingSyndEntries, fetchingEntries);
+		sort(fetchingEntries);
 
-		this.syndEntries = fetchingSyndEntries;
 		this.entries = fetchingEntries;
 	}
 
@@ -170,6 +196,8 @@ public class PlanetServlet extends HttpServlet {
 			}
 
 			FeedContent fc = new FeedContent();
+			fc.setGroupingDateFormat(groupingDateFormat);
+			fc.setPostDateFormat(postDateFormat);
 			fc.setPost(syndEntry);
 			fc.setSiteName(inFeed.getTitle());
 			fc.setSiteDescription(inFeed.getDescription());
@@ -179,20 +207,7 @@ public class PlanetServlet extends HttpServlet {
 		}
 	}
 
-	private void sort(List<SyndEntry> fetchingSyndEntries,
-			List<FeedContent> fetchingEntries) {
-		Collections.sort(fetchingSyndEntries, new Comparator<SyndEntry>() {
-
-			public int compare(SyndEntry o1, SyndEntry o2) {
-				if (o1 == null || FeedContent.findDate(o1) == null) {
-					return 1;
-				} else if (o2 == null || FeedContent.findDate(o2) == null) {
-					return -1;
-				}
-				return -FeedContent.findDate(o1).compareTo(
-						FeedContent.findDate(o2));
-			}
-		});
+	private void sort(List<FeedContent> fetchingEntries) {
 		Collections.sort(fetchingEntries, new Comparator<FeedContent>() {
 
 			public int compare(FeedContent o1, FeedContent o2) {
