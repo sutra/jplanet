@@ -20,6 +20,6 @@
 	<!-- 新闻条目时间格式 -->
 	<entry key="postDateFormat">yyyy年MM月dd日 HH:mm</entry>
 	
-	<!-- Feed 抓取间隔（秒） -->
-	<entry key="updatePeriod">600</entry>
+	<!-- The period of fetching feed(in minute) -->
+	<entry key="updatePeriod">60</entry>
 </properties>

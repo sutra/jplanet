@@ -76,8 +76,8 @@ public class PlanetServlet extends HttpServlet {
 			for (Subscription subscription : planet.getSubscriptions()) {
 				log.debug(subscription.getFeedUrl());
 			}
-			log.debug(String.format("update period(seconds): %1$d",
-					1000 * planet.getUpdatePeriod()));
+			log.debug(String.format("update period(minutes): %1$d", planet
+					.getUpdatePeriod()));
 		}
 
 		// set timer to get feeds
@@ -85,10 +85,12 @@ public class PlanetServlet extends HttpServlet {
 
 			@Override
 			public void run() {
+				log.debug("timer task start.");
 				updateDate = new Date();
 				fetchFeeds();
+				log.debug("timer task end.");
 			}
-		}, 0, planet.getUpdatePeriod());
+		}, 0, 1000 * 60 * planet.getUpdatePeriod());
 	}
 
 	@Override
@@ -181,10 +183,6 @@ public class PlanetServlet extends HttpServlet {
 		List<SyndEntry> syndEntries = inFeed.getEntries();
 		fetchingSyndEntries.addAll(syndEntries);
 		for (SyndEntry syndEntry : syndEntries) {
-			if (log.isDebugEnabled()) {
-				log.debug("description: " + syndEntry.getDescription());
-				log.debug("content: " + syndEntry.getContents().get(0));
-			}
 			if (syndEntry.getPublishedDate() == null) {
 				syndEntry.setPublishedDate(syndEntry.getUpdatedDate());
 			}
