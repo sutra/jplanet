@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>${planet.title}</title>
-<meta http-equiv="Content-Type
+<meta http-equiv="Content-Type"
 	content="application/xhtml-xml; charset=utf-8" />
 <meta content="all" name="robots" />
 
@@ -56,7 +56,7 @@
 					</div>
 					<div class="post-contents">${entry.description.value}</div>
 					<div class="post-footer">
-						<p><a href="${entry.post.link}">${entry.postDate}</a><p>
+						<p><a href="${entry.post.link}">${entry.postDate}</a></p>
 					</div>
 				</div>
 			</div>
