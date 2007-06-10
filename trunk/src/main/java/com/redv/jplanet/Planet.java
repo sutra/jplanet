@@ -4,7 +4,11 @@
 package com.redv.jplanet;
 
 import java.io.Serializable;
+import java.util.LinkedHashSet;
 import java.util.Set;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * @author sutra
@@ -16,6 +20,8 @@ public class Planet implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -1307732302091728827L;
+
+	private static final Log log = LogFactory.getLog(Planet.class);
 
 	private String title;
 
@@ -35,10 +41,12 @@ public class Planet implements Serializable {
 
 	private String postDateFormat;
 
-	private Set<Subscription> subscriptions;
+	private Set<Subscription> subscriptions = new LinkedHashSet<Subscription>();
+
+	private Set<User> editors = new LinkedHashSet<User>();
 
 	/**
-	 * In second.
+	 * In minite.
 	 */
 	private long updatePeriod;
 
@@ -207,4 +215,31 @@ public class Planet implements Serializable {
 		this.updatePeriod = updatePeriod;
 	}
 
+	/**
+	 * @return editors
+	 */
+	public Set<User> getEditors() {
+		return editors;
+	}
+
+	/**
+	 * @param editors
+	 *            要设置的 editors
+	 */
+	public void setEditors(Set<User> editors) {
+		this.editors = editors;
+	}
+
+	public void addSubscription(Subscription subscription) {
+		synchronized (subscriptions) {
+			log.debug("addSubscription called.");
+			this.subscriptions.add(subscription);
+		}
+	}
+
+	public void addEditor(User user) {
+		synchronized (editors) {
+			this.editors.add(user);
+		}
+	}
 }

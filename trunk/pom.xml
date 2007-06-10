@@ -73,9 +73,24 @@
 			<type>jar</type>
 		</dependency>
 		<dependency>
+			<groupId>commons-digester</groupId>
+			<artifactId>commons-digester</artifactId>
+			<version>1.8</version>
+		</dependency>
+		<dependency>
 			<groupId>commons-betwixt</groupId>
 			<artifactId>commons-betwixt</artifactId>
-			<version>0.8</version>
+			<version>20030211.133854</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openid4java</groupId>
+			<artifactId>openid4java</artifactId>
+			<version>0.9.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>2.0.5</version>
 		</dependency>
 	</dependencies>
 	<build>

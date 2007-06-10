@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.redv.jplanet.conf.Config;
 import com.sun.syndication.feed.synd.SyndContent;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
@@ -37,18 +38,22 @@ import com.sun.syndication.io.SyndFeedOutput;
  * @author Sutra Zhou
  * 
  */
-public class PlanetServlet extends HttpServlet {
+public class AggregatorServlet extends HttpServlet {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -2001221873578784258L;
 
-	private static final Log log = LogFactory.getLog(PlanetServlet.class);
+	private static final Log log = LogFactory.getLog(AggregatorServlet.class);
+
+	private Timer configTimer = new Timer();
 
 	private Timer timer = new Timer();
 
 	private Planet planet;
+
+	private long updatePeriod;
 
 	private DateFormat groupingDateFormat;
 
@@ -63,7 +68,7 @@ public class PlanetServlet extends HttpServlet {
 		super.init();
 
 		try {
-			planet = new XmlPropertiesConfigReader().read();
+			planet = Config.getInstance().getPlanet();
 			this.groupingDateFormat = new SimpleDateFormat(planet
 					.getGroupingDateFormat());
 			this.postDateFormat = new SimpleDateFormat(planet
@@ -73,24 +78,50 @@ public class PlanetServlet extends HttpServlet {
 		}
 
 		if (log.isDebugEnabled()) {
-			for (Subscription subscription : planet.getSubscriptions()) {
-				log.debug(subscription.getFeedUrl());
+			log.debug("planet.subscriptions: " + planet.getSubscriptions());
+			if (planet.getSubscriptions() != null) {
+				log.debug("planet.subscriptions.size: "
+						+ planet.getSubscriptions().size());
+				for (Subscription subscription : planet.getSubscriptions()) {
+					log.debug(subscription.getFeedUrl());
+				}
 			}
 			log.debug(String.format("update period(minutes): %1$d", planet
 					.getUpdatePeriod()));
 		}
 
-		// set timer to get feeds
-		timer.schedule(new TimerTask() {
+		configTimer.schedule(new TimerTask() {
 
 			@Override
 			public void run() {
-				log.debug("timer task start.");
-				updateDate = new Date();
-				fetchFeeds();
-				log.debug("timer task end.");
+				if (updatePeriod != planet.getUpdatePeriod()) {
+					log.debug("updatePriod was modified, reset timer.");
+					updatePeriod = planet.getUpdatePeriod();
+					try {
+						timer.cancel();
+					} catch (IllegalStateException e) {
+						log.debug("Timer already cancelled.");
+					}
+
+					timer = new Timer();
+					// set timer to get feeds
+					timer.schedule(new TimerTask() {
+
+						@Override
+						public void run() {
+							log.debug("timer task start.");
+							updateDate = new Date();
+							fetchFeeds();
+							log.debug("timer task end.");
+						}
+					}, 0, 1000 * 60 * planet.getUpdatePeriod());
+					log.debug("timer resetted");
+				} else {
+					log.debug("updatePriod has not been modified.");
+				}
 			}
-		}, 0, 1000 * 60 * planet.getUpdatePeriod());
+
+		}, 0, 1000 * 60 * 10);
 	}
 
 	@Override
@@ -151,19 +182,21 @@ public class PlanetServlet extends HttpServlet {
 	private synchronized void fetchFeeds() {
 		List<SyndEntry> fetchingSyndEntries = new ArrayList<SyndEntry>();
 		List<FeedContent> fetchingEntries = new ArrayList<FeedContent>();
-		for (Subscription subscription : planet.getSubscriptions()) {
-			String feedUrl = subscription.getFeedUrl();
-			if (feedUrl.length() == 0) {
-				continue;
+		if (planet.getSubscriptions() != null) {
+			for (Subscription subscription : planet.getSubscriptions()) {
+				String feedUrl = subscription.getFeedUrl();
+				if (feedUrl.length() == 0) {
+					continue;
+				}
+				try {
+					retrieveFeed(fetchingSyndEntries, fetchingEntries, feedUrl);
+				} catch (Exception e) {
+					log.error("error while reading feed: " + feedUrl, e);
+				}
 			}
-			try {
-				retrieveFeed(fetchingSyndEntries, fetchingEntries, feedUrl);
-			} catch (Exception e) {
-				log.error("error while reading feed: " + feedUrl, e);
-			}
-		}
 
-		sort(fetchingEntries);
+			sort(fetchingEntries);
+		}
 
 		this.entries = fetchingEntries;
 	}

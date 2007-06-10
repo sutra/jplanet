@@ -4,22 +4,63 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 	<display-name>JPlanet</display-name>
 	<servlet>
-		<servlet-name>planet</servlet-name>
-		<servlet-class>com.redv.jplanet.PlanetServlet</servlet-class>
+		<servlet-name>aggregator</servlet-name>
+		<servlet-class>
+			com.redv.jplanet.AggregatorServlet
+		</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	<servlet>
+		<servlet-name>/admin/login</servlet-name>
+		<servlet-class>
+			com.redv.jplanet.admin.LoginServlet
+		</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>/admin/planet</servlet-name>
+		<servlet-class>
+			com.redv.jplanet.admin.PlanetServlet
+		</servlet-class>
+	</servlet>
+	<filter>
+		<display-name>Set Character Encoding Filter</display-name>
+		<filter-name>Set Character Encoding Filter</filter-name>
+		<filter-class>
+			org.springframework.web.filter.CharacterEncodingFilter
+		</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
 	<filter>
 		<filter-name>UrlRewriteFilter</filter-name>
 		<filter-class>
 			org.tuckey.web.filters.urlrewrite.UrlRewriteFilter
 		</filter-class>
 	</filter>
+	<filter>
+		<filter-name>LoginFilter</filter-name>
+		<filter-class>com.redv.jplanet.admin.LoginFilter</filter-class>
+	</filter>
 
 	<servlet-mapping>
-		<servlet-name>planet</servlet-name>
+		<servlet-name>aggregator</servlet-name>
 		<url-pattern>/aggregator</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>/admin/login</servlet-name>
+		<url-pattern>/admin/login</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>/admin/planet</servlet-name>
+		<url-pattern>/admin/planet</url-pattern>
+	</servlet-mapping>
 
+	<filter-mapping>
+		<filter-name>Set Character Encoding Filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 	<filter-mapping>
 		<filter-name>UrlRewriteFilter</filter-name>
 		<url-pattern>/rss</url-pattern>
@@ -31,5 +72,9 @@
 	<filter-mapping>
 		<filter-name>UrlRewriteFilter</filter-name>
 		<url-pattern>*.xml</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
+		<servlet-name>/admin/planet</servlet-name>
 	</filter-mapping>
 </web-app>

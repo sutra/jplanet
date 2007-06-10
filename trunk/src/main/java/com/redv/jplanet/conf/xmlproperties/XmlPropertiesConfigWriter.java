@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.redv.jplanet;
+package com.redv.jplanet.conf.xmlproperties;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -10,11 +10,16 @@ import java.io.OutputStream;
 import java.util.Properties;
 import java.util.Set;
 
+import com.redv.jplanet.Planet;
+import com.redv.jplanet.Subscription;
+import com.redv.jplanet.conf.ConfigWriter;
+import com.redv.jplanet.conf.Constant;
+
 /**
  * @author sutra
  * 
  */
-public class XmlPropertiesConfigWriter {
+public class XmlPropertiesConfigWriter implements ConfigWriter {
 	public void write(Planet planet) throws IOException {
 		Properties p = new Properties();
 		p.setProperty("title", planet.getTitle());
@@ -27,8 +32,8 @@ public class XmlPropertiesConfigWriter {
 		p.setProperty("groupingDateFormat", planet.getGroupingDateFormat());
 		p.setProperty("postDateFormat", planet.getPostDateFormat());
 		p.setProperty("updatePeriod", String.valueOf(planet.getUpdatePeriod()));
-		OutputStream os = new FileOutputStream(new File(XmlPropertiesConfigReader
-				.getDataDir(), "planet.xml"));
+		OutputStream os = new FileOutputStream(new File(Constant.getDataDir(),
+				"planet.xml"));
 		p.storeToXML(os, "JPlanet configuration.", "UTF-8");
 		writeSubscriptions(planet.getSubscriptions());
 	}
@@ -48,8 +53,8 @@ public class XmlPropertiesConfigWriter {
 					subscription.getSiteUrl());
 			id++;
 		}
-		OutputStream os = new FileOutputStream(new File(XmlPropertiesConfigReader
-				.getDataDir(), "subscriptions.xml"));
+		OutputStream os = new FileOutputStream(new File(Constant.getDataDir(),
+				"subscriptions.xml"));
 		p.storeToXML(os, "JPlanet subscriptions configuration.", "UTF-8");
 	}
 }

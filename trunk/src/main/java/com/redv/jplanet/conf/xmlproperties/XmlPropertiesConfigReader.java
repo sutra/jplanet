@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.redv.jplanet;
+package com.redv.jplanet.conf.xmlproperties;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,28 +14,22 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
+import com.redv.jplanet.Planet;
+import com.redv.jplanet.Subscription;
+import com.redv.jplanet.conf.ConfigReader;
+import com.redv.jplanet.conf.Constant;
+
 /**
  * @author sutra
  * 
  */
-public class XmlPropertiesConfigReader {
-	public static File getDataDir() {
-		Properties p = new Properties();
-		try {
-			p
-					.load(XmlPropertiesConfigReader.class
-							.getResourceAsStream("/planet.properties"));
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-		return new File(p.getProperty("conf.dir"));
-	}
+public class XmlPropertiesConfigReader implements ConfigReader {
 
 	public Planet read() throws InvalidPropertiesFormatException, IOException {
 		Planet planet = new Planet();
 		Properties p = new Properties();
-		InputStream is = new FileInputStream(new File(
-				XmlPropertiesConfigReader.getDataDir(), "planet.xml"));
+		InputStream is = new FileInputStream(new File(Constant.getDataDir(),
+				"planet.xml"));
 		try {
 			p.loadFromXML(is);
 			planet.setTitle(p.getProperty("title").trim());
@@ -62,8 +56,8 @@ public class XmlPropertiesConfigReader {
 			throws InvalidPropertiesFormatException, IOException {
 		Map<String, Subscription> subscriptions = new LinkedHashMap<String, Subscription>();
 		Properties p = new Properties();
-		InputStream is = new FileInputStream(new File(
-				XmlPropertiesConfigReader.getDataDir(), "subscriptions.xml"));
+		InputStream is = new FileInputStream(new File(Constant.getDataDir(),
+				"subscriptions.xml"));
 		p.loadFromXML(is);
 		try {
 			for (Object k : p.keySet()) {
