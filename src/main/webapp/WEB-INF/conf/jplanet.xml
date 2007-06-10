@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Planet id="1">
+  <adminEmail>zhoushuqun@gmail.com</adminEmail>
+  <adminName>Sutra Zhou</adminName>
+  <description>JPlanet is an awesome 'river of news' feed reader. It downloads news feeds published by web sites and aggregates their content together into a single combined feed, latest news first.</description>
+  <editors>
+    <editor id="2">
+      <openid>http://zhoushuqun.com/</openid>
+    </editor>
+  </editors>
+  <groupingDateFormat>yyyy年MM月dd日</groupingDateFormat>
+  <language>zh-CN</language>
+  <mailSubject>planet.openid.net.cn</mailSubject>
+  <postDateFormat>yyyy年MM月dd日 HH:mm</postDateFormat>
+  <siteUrl>http://planet.openid.net.cn</siteUrl>
+  <subscriptions>
+    <subscription id="3">
+      <description>OpenID 中文</description>
+      <feedUrl>http://feeds.feedburner.com/openidplanet</feedUrl>
+      <siteUrl>http://www.openidchina.com.cn/</siteUrl>
+      <title>OpenID 中文</title>
+    </subscription>
+    <subscription id="4">
+      <description>IDSelf</description>
+      <feedUrl>http://feeds.feedburner.com/idself</feedUrl>
+      <siteUrl>http://idself.cn/</siteUrl>
+      <title>IDSelf</title>
+    </subscription>
+  </subscriptions>
+  <title>JPlanet</title>
+  <updatePeriod>1</updatePeriod>
+</Planet>
