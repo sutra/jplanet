@@ -14,7 +14,7 @@ import java.util.Set;
  * @author sutra
  * 
  */
-public class ConfigWriter {
+public class XmlPropertiesConfigWriter {
 	public void write(Planet planet) throws IOException {
 		Properties p = new Properties();
 		p.setProperty("title", planet.getTitle());
@@ -27,7 +27,7 @@ public class ConfigWriter {
 		p.setProperty("groupingDateFormat", planet.getGroupingDateFormat());
 		p.setProperty("postDateFormat", planet.getPostDateFormat());
 		p.setProperty("updatePeriod", String.valueOf(planet.getUpdatePeriod()));
-		OutputStream os = new FileOutputStream(new File(ConfigReader
+		OutputStream os = new FileOutputStream(new File(XmlPropertiesConfigReader
 				.getDataDir(), "planet.xml"));
 		p.storeToXML(os, "JPlanet configuration.", "UTF-8");
 		writeSubscriptions(planet.getSubscriptions());
@@ -48,7 +48,7 @@ public class ConfigWriter {
 					subscription.getSiteUrl());
 			id++;
 		}
-		OutputStream os = new FileOutputStream(new File(ConfigReader
+		OutputStream os = new FileOutputStream(new File(XmlPropertiesConfigReader
 				.getDataDir(), "subscriptions.xml"));
 		p.storeToXML(os, "JPlanet subscriptions configuration.", "UTF-8");
 	}

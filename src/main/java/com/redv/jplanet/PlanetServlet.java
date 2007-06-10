@@ -63,7 +63,7 @@ public class PlanetServlet extends HttpServlet {
 		super.init();
 
 		try {
-			planet = new ConfigReader().read();
+			planet = new XmlPropertiesConfigReader().read();
 			this.groupingDateFormat = new SimpleDateFormat(planet
 					.getGroupingDateFormat());
 			this.postDateFormat = new SimpleDateFormat(planet
