@@ -72,6 +72,11 @@
 			<version>2.3</version>
 			<type>jar</type>
 		</dependency>
+		<dependency>
+			<groupId>commons-betwixt</groupId>
+			<artifactId>commons-betwixt</artifactId>
+			<version>0.8</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>jplanet</finalName>

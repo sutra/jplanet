@@ -18,12 +18,12 @@ import java.util.Set;
  * @author sutra
  * 
  */
-public class ConfigReader {
+public class XmlPropertiesConfigReader {
 	public static File getDataDir() {
 		Properties p = new Properties();
 		try {
 			p
-					.load(ConfigReader.class
+					.load(XmlPropertiesConfigReader.class
 							.getResourceAsStream("/planet.properties"));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
@@ -35,7 +35,7 @@ public class ConfigReader {
 		Planet planet = new Planet();
 		Properties p = new Properties();
 		InputStream is = new FileInputStream(new File(
-				ConfigReader.getDataDir(), "planet.xml"));
+				XmlPropertiesConfigReader.getDataDir(), "planet.xml"));
 		try {
 			p.loadFromXML(is);
 			planet.setTitle(p.getProperty("title").trim());
@@ -63,7 +63,7 @@ public class ConfigReader {
 		Map<String, Subscription> subscriptions = new LinkedHashMap<String, Subscription>();
 		Properties p = new Properties();
 		InputStream is = new FileInputStream(new File(
-				ConfigReader.getDataDir(), "subscriptions.xml"));
+				XmlPropertiesConfigReader.getDataDir(), "subscriptions.xml"));
 		p.loadFromXML(is);
 		try {
 			for (Object k : p.keySet()) {
