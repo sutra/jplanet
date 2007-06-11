@@ -22,6 +22,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.redv.jplanet.conf.Config;
+import com.redv.jplanet.conf.Constant;
 import com.sun.syndication.feed.synd.SyndContent;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
@@ -121,7 +122,7 @@ public class AggregatorServlet extends HttpServlet {
 				}
 			}
 
-		}, 0, 1000 * 60 * 10);
+		}, 0, 1000 * 60 * Constant.getAggregatorConfigTimerPeriod());
 	}
 
 	@Override

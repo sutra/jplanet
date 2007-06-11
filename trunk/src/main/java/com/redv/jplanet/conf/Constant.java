@@ -23,6 +23,9 @@ public class Constant {
 	private static ConfigReader configReader;
 
 	private static ConfigWriter configWriter;
+
+	private static long aggregatorConfigTimerPeriod;
+
 	static {
 		Properties p = new Properties();
 		try {
@@ -30,6 +33,8 @@ public class Constant {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+		aggregatorConfigTimerPeriod = Long.parseLong(p
+				.getProperty("aggregator.configTimer.period"));
 		String confDir = replaceSystemProperty(p.getProperty("conf.dir"));
 		log.debug("confDir: " + confDir);
 		dataDir = new File(confDir);
@@ -45,6 +50,10 @@ public class Constant {
 
 	public static File getDataDir() {
 		return dataDir;
+	}
+
+	public static long getAggregatorConfigTimerPeriod() {
+		return aggregatorConfigTimerPeriod;
 	}
 
 	public static ConfigReader getConfigReader() {
