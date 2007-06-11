@@ -14,11 +14,15 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * @author sutra
  * 
  */
 public class LoginFilter implements Filter {
+	private static final Log log = LogFactory.getLog(LoginFilter.class);
 
 	/*
 	 * （非 Javadoc）
@@ -40,8 +44,15 @@ public class LoginFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
 		if (req.getSession().getAttribute("editor") == null) {
+			if (log.isDebugEnabled()) {
+				log.debug("not logged in.");
+			}
 			resp.sendRedirect("login.jsp");
 		} else {
+			if (log.isDebugEnabled()) {
+				log.debug(String.format("logged in: ", req.getSession()
+						.getAttribute("editor")));
+			}
 			chain.doFilter(request, response);
 		}
 	}
