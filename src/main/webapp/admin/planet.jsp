@@ -8,29 +8,45 @@
 </head>
 <body>
 <form name="planet" method="post">
+<fieldset>
+<legend><fmt:message key="planet.site" /></legend>
 <dl>
-<dt><fmt:message key="planet.title" /><fmt:message key="colon" /></dt>
-<dd><input type="text" name="title" value="${planet.title}" /></dd>
-<dt><fmt:message key="planet.description" /><fmt:message key="colon" /></dt>
-<dd><textarea rows="5" cols="100" name="description">${planet.description}</textarea></dd>
-<dt><fmt:message key="planet.siteUrl" /><fmt:message key="colon" /></dt>
-<dd><input type="text" name="siteUrl" value="${planet.siteUrl}" /></dd>
-<dt><fmt:message key="planet.language" /><fmt:message key="colon" /></dt>
-<dd><input type="text" name="language" value="${planet.language}" /></dd>
-<dt><fmt:message key="planet.adminName" /><fmt:message key="colon" /></dt>
-<dd><input type="text" name="adminName" value="${planet.adminName}" /></dd>
-<dt><fmt:message key="planet.adminEmail" /><fmt:message key="colon" /></dt>
-<dd><input type="text" name="adminEmail" value="${planet.adminEmail}" /></dd>
-<dt><fmt:message key="planet.mailSubject" /><fmt:message key="colon" /></dt>
-<dd><input type="text" name="mailSubject" value="${planet.mailSubject}" /></dd>
-<dt><fmt:message key="planet.groupingDateFormat" /><fmt:message key="colon" /></dt>
-<dd><input type="text" name="groupingDateFormat" value="${planet.groupingDateFormat}" /></dd>
-<dt><fmt:message key="planet.postDateFormat" /><fmt:message key="colon" /></dt>
-<dd><input type="text" name="postDateFormat" value="${planet.postDateFormat}" /></dd>
-<dt><fmt:message key="planet.updatePeriod" /><fmt:message key="colon" /></dt>
-<dd><input type="text" name="updatePeriod" value="${planet.updatePeriod}" /><fmt:message key="minutes" /></dd>
+<dt><label for="title"><fmt:message key="planet.title" /><fmt:message key="colon" /></label></dt>
+<dd><input type="text" id="title" name="title" value="${planet.title}" /></dd>
+<dt><label for="siteUrl"><fmt:message key="planet.siteUrl" /><fmt:message key="colon" /></label></dt>
+<dd><input type="text" name="siteUrl" id="siteUrl" value="${planet.siteUrl}" /></dd>
+<dt><label for="language"><fmt:message key="planet.language" /><fmt:message key="colon" /></label></dt>
+<dd><input type="text" name="language" id="language" value="${planet.language}" /></dd>
+<dt><label for="description"><fmt:message key="planet.description" /><fmt:message key="colon" /></label></dt>
+<dd><textarea rows="5" cols="100" name="description" id="description">${planet.description}</textarea></dd>
 </dl>
+</fieldset>
+<fieldset>
+<legend><fmt:message key="planet.admin" /></legend>
+<dl>
+<dt><label for="adminName"><fmt:message key="planet.adminName" /><fmt:message key="colon" /></label></dt>
+<dd><input type="text" name="adminName" id="adminName" value="${planet.adminName}" /></dd>
+<dt><label for="adminEmail"><fmt:message key="planet.adminEmail" /><fmt:message key="colon" /></label></dt>
+<dd><input type="text" name="adminEmail" id="adminEmail" value="${planet.adminEmail}" /></dd>
+<dt><label for="mailSubject"><fmt:message key="planet.mailSubject" /><fmt:message key="colon" /></label></dt>
+<dd><input type="text" name="mailSubject" id="mailSubject" value="${planet.mailSubject}" /></dd>
+</dl>
+</fieldset>
 
+<fieldset>
+<legend><fmt:message key="date" /></legend>
+<dl>
+<dt><label for="groupingDateFormat"><fmt:message key="planet.groupingDateFormat" /><fmt:message key="colon" /></label></dt>
+<dd><input type="text" name="groupingDateFormat" id="groupingDateFormat" value="${planet.groupingDateFormat}" /></dd>
+<dt><label for="postDateFormat"><fmt:message key="planet.postDateFormat" /><fmt:message key="colon" /></label></dt>
+<dd><input type="text" name="postDateFormat" id="postDateFormat" value="${planet.postDateFormat}" /></dd>
+<dt><label for="updatePeriod"><fmt:message key="planet.updatePeriod" /><fmt:message key="colon" /></label></dt>
+<dd><input type="text" name="updatePeriod" id="updatePeriod" value="${planet.updatePeriod}" /><fmt:message key="minutes" /></dd>
+</dl>
+</fieldset>
+
+<fieldset>
+<legend><fmt:message key="planet.editors" /></legend>
 <table>
 <thead>
 <tr>
@@ -49,7 +65,10 @@
 </tbody>
 <tfoot><tr><td><input type="button" onclick="addOpenIdRow()" value="<fmt:message key="addRow" />" /></td></tr></tfoot>
 </table>
+</fieldset>
 
+<fieldset>
+<legend><fmt:message key="planet.subscriptions" /></legend>
 <table>
 <thead>
 <tr>
@@ -77,6 +96,7 @@
 </tbody>
 <tfoot><tr><td><input type="button" onclick="addSubscriptionRow()" value="<fmt:message key="addRow" />" /></td></tr></tfoot>
 </table>
+</fieldset>
 
 <input type="submit" name="save" value="<fmt:message key="save" />" />
 
