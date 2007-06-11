@@ -49,7 +49,7 @@ public class BetwixtConfigReader implements ConfigReader {
 			log.warn(String.format(
 					"Could not find configuration from %1$s; using defaults.",
 					jplanetFile.getPath(), e));
-			log.warn("Loading configuration from safe-jplanet.xml.");
+			log.warn("Loading configuration from jplanet-failsafe.xml.");
 			return (Planet) reader.parse(this.getClass().getResourceAsStream(
 					"jplanet-failsafe.xml"));
 		}
