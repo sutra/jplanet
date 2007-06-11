@@ -4,8 +4,11 @@
 package com.redv.jplanet.conf.betwixt;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.apache.commons.betwixt.io.BeanReader;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.redv.jplanet.Planet;
 import com.redv.jplanet.Subscription;
@@ -18,6 +21,7 @@ import com.redv.jplanet.conf.Constant;
  * 
  */
 public class BetwixtConfigReader implements ConfigReader {
+	private static final Log log = LogFactory.getLog(BetwixtConfigReader.class);
 
 	/*
 	 * （非 Javadoc）
@@ -38,8 +42,16 @@ public class BetwixtConfigReader implements ConfigReader {
 				"addSubscription");
 		reader.addSetNext("Planet/editors/editor", "addEditor");
 
-		return (Planet) reader.parse(new File(Constant.getDataDir(),
-				"jplanet.xml"));
+		File jplanetFile = new File(Constant.getDataDir(), "jplanet.xml");
+		try {
+			return (Planet) reader.parse(jplanetFile);
+		} catch (IOException e) {
+			log.warn(String.format(
+					"Could not find configuration from %1$s; using defaults.",
+					jplanetFile.getPath(), e));
+			log.warn("Loading configuration from safe-jplanet.xml.");
+			return (Planet) reader.parse(this.getClass().getResourceAsStream(
+					"jplanet-failsafe.xml"));
+		}
 	}
-
 }
