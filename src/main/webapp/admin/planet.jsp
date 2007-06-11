@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
-
 <html>
 <head>
 <script type="text/javascript">
@@ -45,32 +45,32 @@ function addSubscriptionRow() {
 <body>
 <form name="planet" method="post">
 <dl>
-<dt>Title:</dt>
+<dt><fmt:message key="planet.title" /><fmt:message key="colon" /></dt>
 <dd><input type="text" name="title" value="${planet.title}" /></dd>
-<dt>Description:</dt>
+<dt><fmt:message key="planet.description" /><fmt:message key="colon" /></dt>
 <dd><textarea rows="5" cols="100" name="description">${planet.description}</textarea></dd>
-<dt>SiteUrl:</dt>
+<dt><fmt:message key="planet.siteUrl" /><fmt:message key="colon" /></dt>
 <dd><input type="text" name="siteUrl" value="${planet.siteUrl}" /></dd>
-<dt>Language:</dt>
+<dt><fmt:message key="planet.language" /><fmt:message key="colon" /></dt>
 <dd><input type="text" name="language" value="${planet.language}" /></dd>
-<dt>AdminName:</dt>
+<dt><fmt:message key="planet.adminName" /><fmt:message key="colon" /></dt>
 <dd><input type="text" name="adminName" value="${planet.adminName}" /></dd>
-<dt>AdminEmail:</dt>
+<dt><fmt:message key="planet.adminEmail" /><fmt:message key="colon" /></dt>
 <dd><input type="text" name="adminEmail" value="${planet.adminEmail}" /></dd>
-<dt>MailSubject:</dt>
+<dt><fmt:message key="planet.mailSubject" /><fmt:message key="colon" /></dt>
 <dd><input type="text" name="mailSubject" value="${planet.mailSubject}" /></dd>
-<dt>GroupingDateFormat:</dt>
+<dt><fmt:message key="planet.groupingDateFormat" /><fmt:message key="colon" /></dt>
 <dd><input type="text" name="groupingDateFormat" value="${planet.groupingDateFormat}" /></dd>
-<dt>PostDateFormat:</dt>
+<dt><fmt:message key="planet.postDateFormat" /><fmt:message key="colon" /></dt>
 <dd><input type="text" name="postDateFormat" value="${planet.postDateFormat}" /></dd>
-<dt>UpdatePeriod:</dt>
-<dd><input type="text" name="updatePeriod" value="${planet.updatePeriod}" />minutes</dd>
+<dt><fmt:message key="planet.updatePeriod" /><fmt:message key="colon" /></dt>
+<dd><input type="text" name="updatePeriod" value="${planet.updatePeriod}" /><fmt:message key="minutes" /></dd>
 </dl>
 
 <table>
 <thead>
 <tr>
-<th>Open ID</th>
+<th><fmt:message key="planet.editor.openid" /></th>
 </tr>
 </thead>
 <tbody id="editors">
@@ -83,16 +83,16 @@ function addSubscriptionRow() {
 <td><input type="text" name="editor.openid" value="" /></td>
 </tr>
 </tbody>
-<tfoot><tr><td><input type="button" onclick="addOpenIdRow()" value="New row" /></td></tr></tfoot>
+<tfoot><tr><td><input type="button" onclick="addOpenIdRow()" value="<fmt:message key="addRow" />" /></td></tr></tfoot>
 </table>
 
 <table>
 <thead>
 <tr>
-<th>Title</th>
-<th>FeedUrl</th>
-<th>SiteUrl</th>
-<th>Description</th>
+<th><fmt:message key="planet.subscription.title" /></th>
+<th><fmt:message key="planet.subscription.feedUrl" /></th>
+<th><fmt:message key="planet.subscription.siteUrl" /></th>
+<th><fmt:message key="planet.subscription.description" /></th>
 </tr>
 </thead>
 <tbody id="subscriptions">
@@ -111,10 +111,10 @@ function addSubscriptionRow() {
 <td><input type="text" name="subscription.description" value="" /></td>
 </tr>
 </tbody>
-<tfoot><tr><td><input type="button" onclick="addSubscriptionRow()" value="New row" /></td></tr></tfoot>
+<tfoot><tr><td><input type="button" onclick="addSubscriptionRow()" value="<fmt:message key="addRow" />" /></td></tr></tfoot>
 </table>
 
-<input type="submit" name="save" value="Save" />
+<input type="submit" name="save" value="<fmt:message key="save" />" />
 
 </form>
 </body>
