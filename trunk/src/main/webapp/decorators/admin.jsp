@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -7,6 +6,7 @@
 	prefix="decorator"%>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/page" prefix="page"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<title>JPlanet - <decorator:title default="Welcome!" />
@@ -21,7 +21,7 @@
 	</head>
 	<body>
 		<div>
-			<div><a href="logout"><fmt:message key="logout" /></a></div>
+			<div><a href="../"><fmt:message key="aggregator" /></a> | <a href="logout"><fmt:message key="logout" /></a></div>
 			<div style="margin: 10px 20px 0px 20px">
 				<decorator:body />
 			</div>
