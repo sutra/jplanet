@@ -75,4 +75,14 @@ public class User {
 		return true;
 	}
 
+	/*
+	 * （非 Javadoc）
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return this.openid;
+	}
+
 }

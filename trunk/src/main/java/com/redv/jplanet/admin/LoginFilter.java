@@ -17,6 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.redv.jplanet.User;
+import com.redv.jplanet.conf.Config;
+
 /**
  * @author sutra
  * 
@@ -43,15 +46,21 @@ public class LoginFilter implements Filter {
 			FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
-		if (req.getSession().getAttribute("editor") == null) {
+		if (Config.getInstance().getPlanet().getEditors().size() == 0) {
+			if (log.isDebugEnabled()) {
+				log.debug("No editor difined, "
+						+ "every one can modify the configuration.");
+			}
+			chain.doFilter(request, response);
+		} else if (req.getSession().getAttribute("editor") == null) {
 			if (log.isDebugEnabled()) {
 				log.debug("not logged in.");
 			}
 			resp.sendRedirect("login.jsp");
 		} else {
 			if (log.isDebugEnabled()) {
-				log.debug(String.format("logged in: ", req.getSession()
-						.getAttribute("editor")));
+				User editor = (User) req.getSession().getAttribute("editor");
+				log.debug(String.format("logged in: %1$s.", editor));
 			}
 			chain.doFilter(request, response);
 		}

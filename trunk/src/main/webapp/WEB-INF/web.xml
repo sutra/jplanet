@@ -19,6 +19,12 @@
 		<param-value>zh</param-value>
 	</context-param>
 
+	<listener>
+		<listener-class>
+			com.redv.jplanet.JPlanetServletContextListener
+		</listener-class>
+	</listener>
+
 	<servlet>
 		<servlet-name>aggregator</servlet-name>
 		<servlet-class>
