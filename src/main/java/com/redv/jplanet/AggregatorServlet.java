@@ -1,12 +1,7 @@
 package com.redv.jplanet;
 
 import java.io.IOException;
-import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Timer;
@@ -23,15 +18,9 @@ import org.apache.commons.logging.LogFactory;
 
 import com.redv.jplanet.conf.Config;
 import com.redv.jplanet.conf.Constant;
-import com.sun.syndication.feed.synd.SyndContent;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.feed.synd.SyndFeedImpl;
-import com.sun.syndication.fetcher.FeedFetcher;
-import com.sun.syndication.fetcher.FetcherException;
-import com.sun.syndication.fetcher.impl.FeedFetcherCache;
-import com.sun.syndication.fetcher.impl.HashMapFeedInfoCache;
-import com.sun.syndication.fetcher.impl.HttpClientFeedFetcher;
 import com.sun.syndication.io.FeedException;
 import com.sun.syndication.io.SyndFeedOutput;
 
@@ -46,21 +35,21 @@ public class AggregatorServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = -2001221873578784258L;
 
+	private static final String ALL_FETCH_FAILED_MESSAGE = "All fetch failed, maybe now network is down.";
+
 	private static final Log log = LogFactory.getLog(AggregatorServlet.class);
 
 	private Timer configTimer = new Timer();
 
 	private Timer timer = new Timer();
 
+	private JPlanetFeedFetcher jplanetFeedFetcher;
+
 	private Planet planet;
 
 	private long updatePeriod;
 
-	private DateFormat groupingDateFormat;
-
-	private DateFormat postDateFormat;
-
-	private Date updateDate;
+	private Date updateDate = new Date();
 
 	private List<FeedContent> entries = new ArrayList<FeedContent>();
 
@@ -68,65 +57,17 @@ public class AggregatorServlet extends HttpServlet {
 	public void init() throws ServletException {
 		super.init();
 
-		try {
-			planet = Config.getInstance().getPlanet();
-			this.groupingDateFormat = new SimpleDateFormat(planet
-					.getGroupingDateFormat());
-			this.postDateFormat = new SimpleDateFormat(planet
-					.getPostDateFormat());
-		} catch (Exception e) {
-			throw new ServletException(e);
-		}
+		planet = Config.getInstance().getPlanet();
 
-		if (log.isDebugEnabled()) {
-			log.debug("planet.subscriptions: " + planet.getSubscriptions());
-			if (planet.getSubscriptions() != null) {
-				log.debug("planet.subscriptions.size: "
-						+ planet.getSubscriptions().size());
-				for (Subscription subscription : planet.getSubscriptions()) {
-					log.debug(subscription.getFeedUrl());
-				}
-			}
-			log.debug(String.format("update period(minutes): %1$d", planet
-					.getUpdatePeriod()));
-		}
+		this.jplanetFeedFetcher = new JPlanetFeedFetcher(planet);
 
-		configTimer.schedule(new TimerTask() {
-
-			@Override
-			public void run() {
-				if (updatePeriod != planet.getUpdatePeriod()) {
-					log.debug("updatePriod was modified, reset timer.");
-					updatePeriod = planet.getUpdatePeriod();
-					try {
-						timer.cancel();
-					} catch (IllegalStateException e) {
-						log.debug("Timer already cancelled.");
-					}
-
-					timer = new Timer();
-					// set timer to get feeds
-					timer.schedule(new TimerTask() {
-
-						@Override
-						public void run() {
-							log.debug("timer task start.");
-							updateDate = new Date();
-							fetchFeeds();
-							log.debug("timer task end.");
-						}
-					}, 0, 1000 * 60 * planet.getUpdatePeriod());
-					log.debug("timer resetted");
-				} else {
-					log.debug("updatePriod has not been modified.");
-				}
-			}
-
-		}, 0, 1000 * 60 * Constant.getAggregatorConfigTimerPeriod());
+		configTimer.schedule(new ConfigTask(), 0, 1000 * 60 * Constant
+				.getAggregatorConfigTimerPeriod());
 	}
 
 	@Override
 	public void destroy() {
+		configTimer.cancel();
 		timer.cancel();
 	}
 
@@ -144,7 +85,7 @@ public class AggregatorServlet extends HttpServlet {
 
 	private void processHtml(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		req.setAttribute("planet", planet);
+		// req.setAttribute("planet", planet);
 		req.setAttribute("updateDate", updateDate);
 		req.setAttribute("entries", entries);
 		String v = "/planet.jsp";
@@ -180,79 +121,57 @@ public class AggregatorServlet extends HttpServlet {
 		return feed;
 	}
 
-	private synchronized void fetchFeeds() {
-		List<SyndEntry> fetchingSyndEntries = new ArrayList<SyndEntry>();
-		List<FeedContent> fetchingEntries = new ArrayList<FeedContent>();
-		if (planet.getSubscriptions() != null) {
-			for (Subscription subscription : planet.getSubscriptions()) {
-				String feedUrl = subscription.getFeedUrl();
-				if (feedUrl.length() == 0) {
-					continue;
-				}
+	private class ConfigTask extends TimerTask {
+
+		/*
+		 * （非 Javadoc）
+		 * 
+		 * @see java.util.TimerTask#run()
+		 */
+		@Override
+		public void run() {
+			if (updatePeriod != Config.getInstance().getPlanet()
+					.getUpdatePeriod()) {
+				log.debug("updatePriod was modified, reset timer.");
+				updatePeriod = planet.getUpdatePeriod();
 				try {
-					retrieveFeed(fetchingSyndEntries, fetchingEntries, feedUrl);
-				} catch (Exception e) {
-					log.error("error while reading feed: " + feedUrl, e);
+					timer.cancel();
+				} catch (IllegalStateException e) {
+					log.debug("Timer already cancelled.");
 				}
-			}
 
-			sort(fetchingEntries);
+				timer = new Timer();
+				// set timer to get feeds
+				timer.schedule(new FetchTask(), 0, 1000 * 60 * planet
+						.getUpdatePeriod());
+				log.debug("timer resetted");
+			} else {
+				log.debug("updatePriod has not been modified.");
+			}
 		}
 
-		this.entries = fetchingEntries;
 	}
 
-	@SuppressWarnings("unchecked")
-	private void retrieveFeed(List<SyndEntry> fetchingSyndEntries,
-			List<FeedContent> fetchingEntries, String feedUrl)
-			throws IllegalArgumentException, IOException, FeedException,
-			FetcherException {
-		FeedFetcherCache feedInfoCache = HashMapFeedInfoCache.getInstance();
-		FeedFetcher feedFetcher = new HttpClientFeedFetcher(feedInfoCache);
+	private class FetchTask extends TimerTask {
 
-		URL inputUrl = new URL(feedUrl);
-		SyndFeed inFeed;
-		inFeed = feedFetcher.retrieveFeed(inputUrl);
-		feedFetcher.setUsingDeltaEncoding(true);
-		List<SyndEntry> syndEntries = inFeed.getEntries();
-		fetchingSyndEntries.addAll(syndEntries);
-		for (SyndEntry syndEntry : syndEntries) {
-			if (syndEntry.getPublishedDate() == null) {
-				syndEntry.setPublishedDate(syndEntry.getUpdatedDate());
-			}
-			if (syndEntry.getDescription() == null) {
-				if (syndEntry.getContents().size() > 0) {
-					syndEntry.setDescription((SyndContent) syndEntry
-							.getContents().get(0));
+		/*
+		 * （非 Javadoc）
+		 * 
+		 * @see java.util.TimerTask#run()
+		 */
+		@Override
+		public void run() {
+			log.debug("timer task start.");
+			synchronized (AggregatorServlet.class) {
+				try {
+					entries = jplanetFeedFetcher.fetchFeeds();
+					updateDate = new Date();
+				} catch (JPlanetFetchException e) {
+					log.error(ALL_FETCH_FAILED_MESSAGE, e);
 				}
 			}
-
-			FeedContent fc = new FeedContent();
-			fc.setGroupingDateFormat(groupingDateFormat);
-			fc.setPostDateFormat(postDateFormat);
-			fc.setPost(syndEntry);
-			fc.setSiteName(inFeed.getTitle());
-			fc.setSiteDescription(inFeed.getDescription());
-			fc.setSiteLink(inFeed.getLink());
-			fc.setFullname(inFeed.getAuthor());
-			fetchingEntries.add(fc);
+			log.debug("timer task end.");
 		}
-	}
 
-	private void sort(List<FeedContent> fetchingEntries) {
-		Collections.sort(fetchingEntries, new Comparator<FeedContent>() {
-
-			public int compare(FeedContent o1, FeedContent o2) {
-				if (o1 == null || o1.getPost() == null
-						|| FeedContent.findDate(o1.getPost()) == null) {
-					return 1;
-				} else if (o2 == null || o2.getPost() == null
-						|| FeedContent.findDate(o2.getPost()) == null) {
-					return -1;
-				}
-				return -FeedContent.findDate(o1.getPost()).compareTo(
-						FeedContent.findDate(o2.getPost()));
-			}
-		});
 	}
 }
