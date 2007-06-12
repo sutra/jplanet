@@ -119,7 +119,7 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>sitemesh</filter-name>
-		<url-pattern>/admin/*</url-pattern>
+		<url-pattern>/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>

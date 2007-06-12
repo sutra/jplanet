@@ -10,7 +10,7 @@ body {
 /* header */
 
 #banner {
-	background: url('img/hdr-planet.jpg') no-repeat;
+	background: url('http://planet.gnome.org/img/hdr-planet.jpg') no-repeat;
 	background-color: #9db8d2;
 	background-position: right;
 	border-bottom: 1px solid #807d74;
@@ -21,7 +21,7 @@ body {
 	position: absolute;
 	top: 10px;
 	left: 10px;
-/*	background: url('http://www.gnome.org/img/logo/text-64') no-repeat;*/
+	background: url('images/jplanet-64.png') no-repeat;
 	width: 64px;
 	height: 64px;
 }
