@@ -85,8 +85,7 @@ public class AggregatorServlet extends HttpServlet {
 
 	private void processHtml(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// req.setAttribute("planet", planet);
-		req.setAttribute("updateDate", updateDate);
+		this.getServletContext().setAttribute("updateDate", updateDate);
 		req.setAttribute("entries", entries);
 		String v = "/planet.jsp";
 		RequestDispatcher rd = getServletContext().getRequestDispatcher(v);

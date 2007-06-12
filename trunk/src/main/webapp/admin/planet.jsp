@@ -98,6 +98,7 @@
 </table>
 </fieldset>
 
+<input type="reset" name="reset" />
 <input type="submit" name="save" value="<fmt:message key="save" />" />
 
 </form>

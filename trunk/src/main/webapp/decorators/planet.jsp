@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -32,42 +34,13 @@
 	</div>
 
 	<div id="body">
-	<c:set var="date" value="" />
-	<c:forEach items="${entries}" var="entry">
-		<c:if test="${date != entry.groupingDate}">
-			<h2 class="date">${entry.groupingDate}</h2>
-			<c:set var="date" value="${entry.groupingDate}" />
-		</c:if>
-
-		<div class="entry benoit">
-			<div class="person-info">
-				<a href="${entry.siteLink}" title="${entry.siteDescription}">
-				<img class="face" src="http://planet.gnome.org/heads/nobody.png" alt="" />
-				<br />${entry.siteName}
-				<c:if test="${!empty entry.post.author}">
-				<br />(${entry.post.author})
-				</c:if>
-				</a>
-			</div>
-			<div class="post">
-				<div class="post2">
-					<div class="post-header">
-						<h4 class="post-title"><a href="${entry.post.link}">${entry.post.title}</a></h4>
-					</div>
-					<div class="post-contents">${entry.description.value}</div>
-					<div class="post-footer">
-						<p><a href="${entry.post.link}">${entry.postDate}</a></p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</c:forEach>
+		<decorator:body />
 	</div>
 
 <div id="sidebar">
 	<div class="section">
-	<h3>${title}</h3>
-	<p>${description}</p>
+	<h3>${planet.title}</h3>
+	<p>${planet.description}</p>
 	<p>Updated on ${updateDate}. Entries are normalised to UTC time.</p>
 	</div>
 
