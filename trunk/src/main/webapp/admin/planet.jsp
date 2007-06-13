@@ -7,6 +7,11 @@
 </head>
 <body>
 <form name="planet" method="post">
+<c:if test="${success == true}">
+	<div class="message">
+		<fmt:message key="admin.save.success" />
+	</div>
+</c:if>
 <fieldset>
 <legend><fmt:message key="planet.site" /></legend>
 <dl>
@@ -111,8 +116,8 @@
 </table>
 </fieldset>
 
-<input type="reset" name="reset" />
 <input type="submit" name="save" value="<fmt:message key="save" />" />
+<input type="reset" name="reset" />
 
 </form>
 </body>

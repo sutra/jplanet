@@ -50,3 +50,11 @@ a:active {
 .center {
 	text-align: center;
 }
+
+.message {
+	color: green;
+}
+
+.error {
+	color: red;
+}

@@ -1,6 +1,6 @@
 <%@ include file="/includes/taglibs.jsp" %>
 	<div class="section">
-	<h3>Colophon</h3>
+	<h3><fmt:message key="heading.colophon" /></h3>
 	<p>Brought to you by the <a href="http://code.google.com/p/jplanet">JPlanet</a> aggregator, <a href="http://redv.com/">Red V</a> (who kindly host the OpenID servers). Beautiful template design by <a href="http://www.actsofvolition.com/">Steven Garrity</a>, concept by <a href="http://www.gnome.org/~seth/">Seth Nickell</a> and <a href="http://www.isity.net/">Diana Fong</a>.</p>
 
 	<p>Planet OpenID is edited by <a href="mailto:${planet.adminEmail}?Subject=${planet.mailSubject}">${planet.adminName}</a>. Please mail him if you have a question or would like your blog <a href="${ctx}/admin">added</a> to the feed.</p>

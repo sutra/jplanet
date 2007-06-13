@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ include file="/includes/taglibs.jsp" %>
 <html>
 <head>
 <title>${planet.title}</title>
@@ -7,9 +7,12 @@
 <body>
 	<c:set var="date" value="" />
 	<c:forEach items="${entries}" var="entry">
-		<c:if test="${date != entry.groupingDate}">
-			<h2 class="date">${entry.groupingDate}</h2>
-			<c:set var="date" value="${entry.groupingDate}" />
+		<c:set var="entryGroupingDate">
+			<fmt:formatDate value="${entry.datetime}" pattern="${planet.groupingDateFormat}" />
+		</c:set>
+		<c:if test="${date != entryGroupingDate}">
+			<h2 class="date"><fmt:formatDate value="${entry.datetime}" pattern="${planet.groupingDateFormat}" /></h2>
+			<c:set var="date" value="${entryGroupingDate}" />
 		</c:if>
 
 		<div class="entry benoit">
@@ -29,7 +32,11 @@
 					</div>
 					<div class="post-contents">${entry.description.value}</div>
 					<div class="post-footer">
-						<p><a href="${entry.post.link}">${entry.postDate}</a></p>
+						<p>
+							<a href="${entry.post.link}">
+								<fmt:formatDate value="${entry.datetime}" pattern="${planet.postDateFormat}" />
+							</a>
+						</p>
 					</div>
 				</div>
 			</div>

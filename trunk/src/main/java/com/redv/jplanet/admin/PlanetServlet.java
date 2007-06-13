@@ -105,6 +105,7 @@ public class PlanetServlet extends HttpServlet {
 		}
 
 		this.setAttributes(req);
+		req.setAttribute("success", true);
 		this.getServletContext().getRequestDispatcher("/admin/planet.jsp")
 				.forward(req, resp);
 	}

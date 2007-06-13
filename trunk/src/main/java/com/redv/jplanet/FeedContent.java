@@ -3,7 +3,6 @@
  */
 package com.redv.jplanet;
 
-import java.text.DateFormat;
 import java.util.Date;
 
 import org.apache.commons.logging.Log;
@@ -33,10 +32,6 @@ public class FeedContent {
 
 	// post
 	private SyndEntry post;
-
-	private DateFormat groupingDateFormat;
-
-	private DateFormat postDateFormat;
 
 	/**
 	 * @return fullname
@@ -135,36 +130,6 @@ public class FeedContent {
 		return findDate(post);
 	}
 
-	/**
-	 * @return groupingDateFormat
-	 */
-	public DateFormat getGroupingDateFormat() {
-		return groupingDateFormat;
-	}
-
-	/**
-	 * @param groupingDateFormat
-	 *            要设置的 groupingDateFormat
-	 */
-	public void setGroupingDateFormat(DateFormat groupingDateFormat) {
-		this.groupingDateFormat = groupingDateFormat;
-	}
-
-	/**
-	 * @return postDateFormat
-	 */
-	public DateFormat getPostDateFormat() {
-		return postDateFormat;
-	}
-
-	/**
-	 * @param postDateFormat
-	 *            要设置的 postDateFormat
-	 */
-	public void setPostDateFormat(DateFormat postDateFormat) {
-		this.postDateFormat = postDateFormat;
-	}
-
 	public SyndContent getDescription() {
 		if (post.getDescription() != null) {
 			return post.getDescription();
@@ -172,14 +137,6 @@ public class FeedContent {
 			return (SyndContent) post.getContents().get(0);
 		}
 		return null;
-	}
-
-	public String getGroupingDate() {
-		return this.groupingDateFormat.format(this.getDatetime());
-	}
-
-	public String getPostDate() {
-		return this.postDateFormat.format(this.getDatetime());
 	}
 
 	public static Date findDate(SyndEntry se) {

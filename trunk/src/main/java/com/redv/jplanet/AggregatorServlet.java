@@ -85,7 +85,6 @@ public class AggregatorServlet extends HttpServlet {
 
 	private void processHtml(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		this.getServletContext().setAttribute("updateDate", updateDate);
 		req.setAttribute("entries", entries);
 		String v = "/planet.jsp";
 		RequestDispatcher rd = getServletContext().getRequestDispatcher(v);
@@ -165,6 +164,7 @@ public class AggregatorServlet extends HttpServlet {
 				try {
 					entries = jplanetFeedFetcher.fetchFeeds();
 					updateDate = new Date();
+					getServletContext().setAttribute("updateDate", updateDate);
 				} catch (JPlanetFetchException e) {
 					log.error(ALL_FETCH_FAILED_MESSAGE, e);
 				}
