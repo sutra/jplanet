@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <decorators defaultdir="/decorators">
+	<decorator name="panel" page="panel.jsp" />
 	<decorator name="planet" page="planet.jsp">
 		<pattern>/</pattern>
 		<pattern>/aggregator</pattern>
-		<pattern>/admin/*</pattern>
 	</decorator>
-	<!-- 
 	<decorator name="admin" page="admin.jsp">
 		<pattern>/admin/*</pattern>
 	</decorator>
-	-->
 </decorators>
