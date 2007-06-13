@@ -20,12 +20,7 @@
 </head>
 <body>
 <div>
-	<jsp:include flush="true" page="/custom/header.jsp" />
-
-	<div>
-		<a href="../"><fmt:message key="aggregator" /></a>
-		· <a href="logout"><fmt:message key="logout" /></a>
-	</div>
+	<jsp:include flush="true" page="/admin/admin-header.jsp" />
 
 	<div id="body">
 		<decorator:body />
