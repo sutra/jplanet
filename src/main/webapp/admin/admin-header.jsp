@@ -21,7 +21,9 @@
 								<c:when test="${!empty editor}">
 									${editor}
 								</c:when>
-								<c:otherwise>anonymous</c:otherwise>
+								<c:otherwise>
+									<fmt:message key="admin.anonymous" />
+								</c:otherwise>
 							</c:choose>
 						</fmt:param>
 					</fmt:message>

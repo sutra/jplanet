@@ -5,8 +5,6 @@ package com.redv.jplanet;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -32,17 +30,10 @@ import com.sun.syndication.io.FeedException;
 public class JPlanetFeedFetcher {
 	private static final Log log = LogFactory.getLog(JPlanetFeedFetcher.class);
 
-	private DateFormat groupingDateFormat;
-
-	private DateFormat postDateFormat;
-
 	private Planet planet;
 
 	public JPlanetFeedFetcher(Planet planet) {
 		this.planet = planet;
-		this.groupingDateFormat = new SimpleDateFormat(planet
-				.getGroupingDateFormat());
-		this.postDateFormat = new SimpleDateFormat(planet.getPostDateFormat());
 	}
 
 	public List<FeedContent> fetchFeeds() throws JPlanetFetchException {
@@ -95,8 +86,6 @@ public class JPlanetFeedFetcher {
 			}
 
 			FeedContent fc = new FeedContent();
-			fc.setGroupingDateFormat(groupingDateFormat);
-			fc.setPostDateFormat(postDateFormat);
 			fc.setPost(syndEntry);
 			fc.setSiteName(inFeed.getTitle());
 			fc.setSiteDescription(inFeed.getDescription());

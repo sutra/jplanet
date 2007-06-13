@@ -71,6 +71,9 @@ public class LoginServlet extends HttpServlet {
 				req.getSession().setAttribute("editor", editor);
 				resp.sendRedirect("planet");
 				ok = true;
+			} else {
+				req.setAttribute("openid_url", editor.getOpenid());
+				req.setAttribute("error", "error.NOT_EDITOR");
 			}
 		}
 		if (!ok) {
