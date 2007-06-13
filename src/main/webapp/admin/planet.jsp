@@ -64,7 +64,16 @@
 </tbody>
 <tfoot>
 <tr>
-<td><fmt:message key="admin.editor.warning" /></td>
+<td>
+<c:choose>
+<c:when test="${empty planet.editors}">
+<font color='red'>
+<fmt:message key="admin.editor.warning" />
+</font>
+</c:when>
+<c:otherwise><fmt:message key="admin.editor.warning" /></c:otherwise>
+</c:choose>
+</td>
 <td><input type="button" onclick="addOpenIdRow()" value="<fmt:message key="addRow" />" /></td>
 </tr>
 </tfoot>
