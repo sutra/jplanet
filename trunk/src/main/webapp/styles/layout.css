@@ -21,7 +21,7 @@ body {
 	position: absolute;
 	top: 10px;
 	left: 10px;
-	background: url('images/jplanet-64.png') no-repeat;
+	background: url('../images/jplanet-64.png') no-repeat;
 	width: 64px;
 	height: 64px;
 }
