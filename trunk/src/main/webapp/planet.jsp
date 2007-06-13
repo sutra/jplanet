@@ -1,6 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<html>
+<head>
+<title>${planet.title}</title>
+</head>
+<body>
 	<c:set var="date" value="" />
 	<c:forEach items="${entries}" var="entry">
 		<c:if test="${date != entry.groupingDate}">
@@ -31,3 +35,5 @@
 			</div>
 		</div>
 	</c:forEach>
+</body>
+</html>

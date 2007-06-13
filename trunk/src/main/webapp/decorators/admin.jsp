@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator"
-	prefix="decorator"%>
-<%@ taglib uri="http://www.opensymphony.com/sitemesh/page" prefix="page"%>
-<c:set var="ctx" value="${pageContext.request.contextPath}" />
+<%@ include file="/includes/taglibs.jsp" %>
+<%@ include file="/includes/sitemesh-taglibs.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
@@ -23,7 +19,7 @@
 		<div>
 			<div><a href="../"><fmt:message key="aggregator" /></a> | <a href="logout"><fmt:message key="logout" /></a></div>
 			<div style="margin: 10px 20px 0px 20px">
-				<decorator:body />
+				<page:applyDecorator page="/admin/planet.jsp" name="planet" />
 			</div>
 		</div>
 	</body>
