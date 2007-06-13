@@ -7,7 +7,7 @@
   <groupingDateFormat>yyyy年MM月dd日</groupingDateFormat>
   <language>zh-CN</language>
   <mailSubject>planet.openid.net.cn</mailSubject>
-  <postDateFormat>yyyy年MM月dd日 HH:mm</postDateFormat>
+  <postDateFormat>yyyy年MM月dd日 HH点mm分</postDateFormat>
   <siteUrl>http://planet.openid.net.cn</siteUrl>
   <subscriptions>
     <subscription id="2">
