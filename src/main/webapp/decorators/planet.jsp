@@ -11,10 +11,7 @@
 
 <jsp:include flush="true" page="/custom/favicon.jsp" />
 
-<link rel="alternate" type="application/rss+xml" href="${ctx}/rss"
-	title="Planet RSS Feed" />
-<link rel="alternate" type="application/atom+xml"
-	href="${ctx}/atom" title="Planet Atom Feed" />
+<jsp:include flush="true" page="/includes/feed.jsp" />
 
 <jsp:include flush="true" page="/custom/styles.jsp" />
 
