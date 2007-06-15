@@ -4,6 +4,8 @@ function addOpenIdRow(){
 	var td1 = document.createElement("td");
 	var input1 = document.createElement("input");
 	input1.name = "editor.openid";
+	input1.className = "text";
+	input1.size = "100"
 	td1.appendChild(input1);
 	row.appendChild(td1);
 	tbody.appendChild(row);
@@ -23,6 +25,14 @@ function addSubscriptionRow() {
 	input2.name = "subscription.feedUrl";
 	input3.name = "subscription.siteUrl";
 	input4.name = "subscription.description";
+	input1.className = "text";
+	input2.className = "text";
+	input3.className = "text";
+	input4.className = "text";
+	input1.size = "15";
+	input2.size = "30";
+	input3.size = "30";
+	input4.size = "40";
 	td1.appendChild(input1);
 	td2.appendChild(input2);
 	td3.appendChild(input3);
