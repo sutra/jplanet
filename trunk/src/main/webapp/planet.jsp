@@ -30,7 +30,7 @@
 					<div class="post-header">
 						<h4 class="post-title"><a href="${entry.post.link}">${entry.post.title}</a></h4>
 					</div>
-					<div class="post-contents">${entry.description.value}</div>
+					<div class="post-contents"><p>${entry.description.value}</p></div>
 					<div class="post-footer">
 						<p>
 							<a href="${entry.post.link}">
