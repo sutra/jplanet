@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.redv.jplanet;
+package com.redv.jplanet.web;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

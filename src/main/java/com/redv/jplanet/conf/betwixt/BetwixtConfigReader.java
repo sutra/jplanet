@@ -10,11 +10,11 @@ import org.apache.commons.betwixt.io.BeanReader;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.redv.jplanet.Constant;
 import com.redv.jplanet.Planet;
 import com.redv.jplanet.Subscription;
 import com.redv.jplanet.User;
 import com.redv.jplanet.conf.ConfigReader;
-import com.redv.jplanet.conf.Constant;
 
 /**
  * @author sutra

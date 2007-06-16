@@ -6,6 +6,7 @@ package com.redv.jplanet.conf;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.redv.jplanet.Constant;
 import com.redv.jplanet.Planet;
 import com.redv.jplanet.Subscription;
 

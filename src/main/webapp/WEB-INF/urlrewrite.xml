@@ -10,7 +10,7 @@
 		<from>^/rss$</from>
 		<to>/aggregator?feedType=rss_2.0</to>
 	</rule>
-	
+
 	<rule>
 		<from>^/(.*).xml$</from>
 		<to>/aggregator?feedType=$1</to>

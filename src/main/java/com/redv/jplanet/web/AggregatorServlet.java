@@ -1,4 +1,4 @@
-package com.redv.jplanet;
+package com.redv.jplanet.web;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,8 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.redv.jplanet.Constant;
+import com.redv.jplanet.FeedContent;
+import com.redv.jplanet.JPlanetFeedFetcher;
+import com.redv.jplanet.JPlanetFetchException;
+import com.redv.jplanet.Planet;
 import com.redv.jplanet.conf.Config;
-import com.redv.jplanet.conf.Constant;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.feed.synd.SyndFeedImpl;

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.redv.jplanet.admin;
+package com.redv.jplanet.web.admin;
 
 import java.io.IOException;
 
