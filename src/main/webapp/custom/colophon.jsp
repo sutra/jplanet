@@ -3,7 +3,15 @@
 	<h3><fmt:message key="heading.colophon" /></h3>
 	<p>Brought to you by the <a href="http://code.google.com/p/jplanet">JPlanet</a> aggregator, <a href="http://redv.com/">Red V</a> (who kindly host the OpenID servers). Beautiful template design by <a href="http://www.actsofvolition.com/">Steven Garrity</a>, concept by <a href="http://www.gnome.org/~seth/">Seth Nickell</a> and <a href="http://www.isity.net/">Diana Fong</a>.</p>
 
-	<p>Planet OpenID is edited by <a href="mailto:${planet.adminEmail}?Subject=${planet.mailSubject}">${planet.adminName}</a>. Please mail him if you have a question or would like your blog <a href="${ctx}/admin">added</a> to the feed.</p>
+	<p>
+		<fmt:message key="colophon.addYourBlogToFeed">
+			<fmt:param>${planet.title}</fmt:param>
+			<fmt:param>${planet.adminEmail}</fmt:param>
+			<fmt:param>${planet.mailSubject}</fmt:param>
+			<fmt:param>${planet.adminName}</fmt:param>
+			<fmt:param><c:url value="/admin" /></fmt:param>
+		</fmt:message>
+	</p>
 	</div>
 
 	<div class="section">
