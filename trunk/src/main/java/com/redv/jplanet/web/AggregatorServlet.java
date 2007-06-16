@@ -115,6 +115,7 @@ public class AggregatorServlet extends HttpServlet {
 		feed.setLink(planet.getSiteUrl());
 		feed.setLanguage(planet.getLanguage());
 		feed.setPublishedDate(this.updateDate);
+		feed.setCopyright(planet.getCopyright());
 		List<SyndEntry> entries = new ArrayList<SyndEntry>();
 		int i = 0;
 		for (FeedContent fc : this.entries) {

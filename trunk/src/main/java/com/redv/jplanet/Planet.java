@@ -31,6 +31,8 @@ public class Planet implements Serializable {
 
 	private String language;
 
+	private String copyright;
+
 	private String adminName;
 
 	private String adminEmail;
@@ -123,6 +125,21 @@ public class Planet implements Serializable {
 	 */
 	public void setLanguage(String language) {
 		this.language = language;
+	}
+
+	/**
+	 * @return copyright
+	 */
+	public String getCopyright() {
+		return copyright;
+	}
+
+	/**
+	 * @param copyright
+	 *            要设置的 copyright
+	 */
+	public void setCopyright(String copyright) {
+		this.copyright = copyright;
 	}
 
 	/**

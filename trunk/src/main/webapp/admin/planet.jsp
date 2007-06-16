@@ -45,14 +45,16 @@ textarea.text {
 <fieldset>
 <legend><fmt:message key="planet.site" /></legend>
 <dl>
-<dt><label for="title"><fmt:message key="planet.title" /><fmt:message key="colon" /></label></dt>
-<dd><input type="text" name="title" id="title" class="text" style="width:100%;" value="${planet.title}" /></dd>
-<dt><label for="siteUrl"><fmt:message key="planet.siteUrl" /><fmt:message key="colon" /></label></dt>
-<dd><input type="text" name="siteUrl" id="siteUrl" class="text" style="width:100%;" value="${planet.siteUrl}" /></dd>
-<dt><label for="language"><fmt:message key="planet.language" /><fmt:message key="colon" /></label></dt>
-<dd><input type="text" name="language" id="language" class="text" style="width:100%;" value="${planet.language}" /></dd>
-<dt><label for="description"><fmt:message key="planet.description" /><fmt:message key="colon" /></label></dt>
-<dd><textarea rows="5" cols="80" name="description" id="description" style="width:100%;" class="text">${planet.description}</textarea></dd>
+<dt><label for="admin.planet.title"><fmt:message key="planet.title" /><fmt:message key="colon" /></label></dt>
+<dd><input type="text" name="title" id="admin.planet.title" class="text" style="width:100%;" value="${planet.title}" /></dd>
+<dt><label for="admin.planet.siteUrl"><fmt:message key="planet.siteUrl" /><fmt:message key="colon" /></label></dt>
+<dd><input type="text" name="siteUrl" id="admin.planet.siteUrl" class="text" style="width:100%;" value="${planet.siteUrl}" /></dd>
+<dt><label for="admin.planet.language"><fmt:message key="planet.language" /><fmt:message key="colon" /></label></dt>
+<dd><input type="text" name="language" id="admin.planet.language" class="text" style="width:100%;" value="${planet.language}" /></dd>
+<dt><label for="admin.planet.description"><fmt:message key="planet.description" /><fmt:message key="colon" /></label></dt>
+<dd><textarea rows="5" cols="80" name="description" id="admin.planet.description" style="width:100%;" class="text">${planet.description}</textarea></dd>
+<dt><label for="admin.planet.copyright"><fmt:message key="planet.copyright" /><fmt:message key="colon" /></label></dt>
+<dd><textarea rows="5" cols="80" name="copyright" id="admin.planet.copyright" style="width:100%;" class="text">${planet.copyright}</textarea></dd>
 </dl>
 </fieldset>
 
