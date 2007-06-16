@@ -5,10 +5,10 @@
   <copyright><![CDATA[Copyright © 2007-2007, <a href="http://redv.com">Redv.com</a><br />Blog entries aggregated on this page are owned by, and represent the opinion of the author.<br /><a href="http://validator.w3.org/check/referer">Optimised</a> for <a href="http://www.w3.org/">standards</a>. Hosted by <a href="http://redv.com/">Red V</a>.]]></copyright>
   <description>JPlanet is an awesome 'river of news' feed reader. It downloads news feeds published by web sites and aggregates their content together into a single combined feed, latest news first.</description>
   <editors/>
-  <groupingDateFormat>yyyy年MM月dd日</groupingDateFormat>
+  <groupingDateFormat>yyyy-MM-dd</groupingDateFormat>
   <language>zh-CN</language>
   <mailSubject>planet.openid.net.cn</mailSubject>
-  <postDateFormat>yyyy年MM月dd日 HH点mm分</postDateFormat>
+  <postDateFormat>yyyy-MM-dd HH:mm</postDateFormat>
   <siteUrl>http://planet.openid.net.cn</siteUrl>
   <subscriptions>
     <subscription id="2">
