@@ -62,14 +62,14 @@ public class PlanetServlet extends HttpServlet {
 		planet.setDescription(req.getParameter("description"));
 		planet.setSiteUrl(req.getParameter("siteUrl"));
 		planet.setLanguage(req.getParameter("language"));
+		planet.setCopyright(req.getParameter("copyright"));
 		planet.setAdminName(req.getParameter("adminName"));
 		planet.setAdminEmail(req.getParameter("adminEmail"));
 		planet.setMailSubject(req.getParameter("mailSubject"));
 		planet.setGroupingDateFormat(req.getParameter("groupingDateFormat"));
 		planet.setPostDateFormat(req.getParameter("postDateFormat"));
-		planet
-				.setUpdatePeriod(Long.parseLong(req
-						.getParameter("updatePeriod")));
+		long updatePeriod = Long.parseLong(req.getParameter("updatePeriod"));
+		planet.setUpdatePeriod(updatePeriod);
 
 		String[] openids = req.getParameterValues("editor.openid");
 		Set<User> editors = new LinkedHashSet<User>();
