@@ -116,7 +116,11 @@ public class AggregatorServlet extends HttpServlet {
 		feed.setLanguage(planet.getLanguage());
 		feed.setPublishedDate(this.updateDate);
 		List<SyndEntry> entries = new ArrayList<SyndEntry>();
+		int i = 0;
 		for (FeedContent fc : this.entries) {
+			if (feedType.equals("rss_0.9") && ++i > 15) {
+				break;
+			}
 			entries.add(fc.getPost());
 		}
 		feed.setEntries(entries);
