@@ -14,6 +14,7 @@
 <jsp:include flush="true" page="/includes/feed.jsp" />
 
 <jsp:include flush="true" page="/custom/styles.jsp" />
+<link rel="stylesheet" href="${ctx}/styles/admin.css" type="text/css" />
 
 <decorator:head />
 
