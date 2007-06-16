@@ -10,9 +10,9 @@ import java.io.Writer;
 
 import org.apache.commons.betwixt.io.BeanWriter;
 
+import com.redv.jplanet.Constant;
 import com.redv.jplanet.Planet;
 import com.redv.jplanet.conf.ConfigWriter;
-import com.redv.jplanet.conf.Constant;
 
 /**
  * @author sutra

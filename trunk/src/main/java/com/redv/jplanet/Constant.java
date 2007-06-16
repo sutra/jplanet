@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.redv.jplanet.conf;
+package com.redv.jplanet;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +10,9 @@ import java.util.Properties;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.redv.jplanet.conf.ConfigReader;
+import com.redv.jplanet.conf.ConfigWriter;
 
 /**
  * @author sutra
