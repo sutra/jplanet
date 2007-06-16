@@ -9,6 +9,6 @@
 		</fmt:message>
 	</div>
 </c:if>
-<input type="text" name="openid_url" style="background: url(http://www.openid.net/login-bg.gif) no-repeat; background-position: 0 50%; padding-left: 18px;" value="${openid_url}" />
+<input type="text" name="openid_url" class="text" style="background: url(http://www.openid.net/login-bg.gif) no-repeat; background-position: 0 50%; padding-left: 18px;" size="50" value="${openid_url}" />
 <input type="submit" name="login" value="<fmt:message key="login" />" />
 </form>
