@@ -59,6 +59,7 @@ public class PlanetServlet extends HttpServlet {
 			throws ServletException, IOException {
 		Planet planet = Config.getInstance().getPlanet();
 		planet.setTitle(req.getParameter("title"));
+		planet.setKeywords(req.getParameter("keywords"));
 		planet.setDescription(req.getParameter("description"));
 		planet.setSiteUrl(req.getParameter("siteUrl"));
 		planet.setLanguage(req.getParameter("language"));
