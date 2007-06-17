@@ -9,6 +9,9 @@
 <meta http-equiv="Content-Type"	content="application/xhtml-xml; charset=utf-8" />
 <meta content="all" name="robots" />
 
+<meta name="keywords" content="${planet.keywords}" />
+<meta name="description" content="${planet.description}" />
+
 <jsp:include flush="true" page="/custom/favicon.jsp" />
 
 <jsp:include flush="true" page="/includes/feed.jsp" />

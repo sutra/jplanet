@@ -25,6 +25,8 @@ public class Planet implements Serializable {
 
 	private String title;
 
+	private String keywords;
+
 	private String description;
 
 	private String siteUrl;
@@ -65,6 +67,21 @@ public class Planet implements Serializable {
 	 */
 	public void setAdminEmail(String adminEmail) {
 		this.adminEmail = adminEmail;
+	}
+
+	/**
+	 * @return keywords
+	 */
+	public String getKeywords() {
+		return keywords;
+	}
+
+	/**
+	 * @param keywords
+	 *            要设置的 keywords
+	 */
+	public void setKeywords(String keywords) {
+		this.keywords = keywords;
 	}
 
 	/**
@@ -246,6 +263,8 @@ public class Planet implements Serializable {
 	public void setEditors(Set<User> editors) {
 		this.editors = editors;
 	}
+
+	/* Public methods */
 
 	public void addSubscription(Subscription subscription) {
 		synchronized (subscriptions) {
