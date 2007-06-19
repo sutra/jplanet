@@ -21,7 +21,10 @@ import com.redv.jplanet.User;
 import com.redv.jplanet.conf.Config;
 
 /**
- * @author sutra
+ * Filter admin login. If user not logged in as a admin, redirect to the login
+ * page. In specially, if no editors difined, it will let the user go through.
+ * 
+ * @author <a href="mailto:zhoushuqun@gmail.com">Sutra Zhou</a>
  * 
  */
 public class LoginFilter implements Filter {

@@ -11,7 +11,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * @author sutra
+ * The model of a planet.
+ * 
+ * @author <a href="mailto:zhoushuqun@gmail.com">Sutra Zhou</a>
  * 
  */
 public class Planet implements Serializable {
@@ -65,7 +67,7 @@ public class Planet implements Serializable {
 	 * @param adminEmail
 	 *            要设置的 adminEmail
 	 */
-	public void setAdminEmail(String adminEmail) {
+	public void setAdminEmail(final String adminEmail) {
 		this.adminEmail = adminEmail;
 	}
 
@@ -80,7 +82,7 @@ public class Planet implements Serializable {
 	 * @param keywords
 	 *            要设置的 keywords
 	 */
-	public void setKeywords(String keywords) {
+	public void setKeywords(final String keywords) {
 		this.keywords = keywords;
 	}
 
@@ -95,7 +97,7 @@ public class Planet implements Serializable {
 	 * @param description
 	 *            要设置的 description
 	 */
-	public void setDescription(String description) {
+	public void setDescription(final String description) {
 		this.description = description;
 	}
 
@@ -110,7 +112,7 @@ public class Planet implements Serializable {
 	 * @param siteUrl
 	 *            要设置的 siteUrl
 	 */
-	public void setSiteUrl(String siteUrl) {
+	public void setSiteUrl(final String siteUrl) {
 		this.siteUrl = siteUrl;
 	}
 
@@ -125,7 +127,7 @@ public class Planet implements Serializable {
 	 * @param title
 	 *            要设置的 title
 	 */
-	public void setTitle(String title) {
+	public void setTitle(final String title) {
 		this.title = title;
 	}
 
@@ -140,7 +142,7 @@ public class Planet implements Serializable {
 	 * @param language
 	 *            要设置的 language
 	 */
-	public void setLanguage(String language) {
+	public void setLanguage(final String language) {
 		this.language = language;
 	}
 
@@ -155,7 +157,7 @@ public class Planet implements Serializable {
 	 * @param copyright
 	 *            要设置的 copyright
 	 */
-	public void setCopyright(String copyright) {
+	public void setCopyright(final String copyright) {
 		this.copyright = copyright;
 	}
 
@@ -170,7 +172,7 @@ public class Planet implements Serializable {
 	 * @param subscriptions
 	 *            要设置的 subscriptions
 	 */
-	public void setSubscriptions(Set<Subscription> subscriptions) {
+	public void setSubscriptions(final Set<Subscription> subscriptions) {
 		this.subscriptions = subscriptions;
 	}
 
@@ -185,7 +187,7 @@ public class Planet implements Serializable {
 	 * @param adminName
 	 *            要设置的 adminName
 	 */
-	public void setAdminName(String adminName) {
+	public void setAdminName(final String adminName) {
 		this.adminName = adminName;
 	}
 
@@ -200,7 +202,7 @@ public class Planet implements Serializable {
 	 * @param mailSubject
 	 *            要设置的 mailSubject
 	 */
-	public void setMailSubject(String mailSubject) {
+	public void setMailSubject(final String mailSubject) {
 		this.mailSubject = mailSubject;
 	}
 
@@ -215,7 +217,7 @@ public class Planet implements Serializable {
 	 * @param groupingDateFormat
 	 *            要设置的 groupingDateFormat
 	 */
-	public void setGroupingDateFormat(String groupingDateFormat) {
+	public void setGroupingDateFormat(final String groupingDateFormat) {
 		this.groupingDateFormat = groupingDateFormat;
 	}
 
@@ -230,7 +232,7 @@ public class Planet implements Serializable {
 	 * @param postDateFormat
 	 *            要设置的 postDateFormat
 	 */
-	public void setPostDateFormat(String postDateFormat) {
+	public void setPostDateFormat(final String postDateFormat) {
 		this.postDateFormat = postDateFormat;
 	}
 
@@ -245,7 +247,7 @@ public class Planet implements Serializable {
 	 * @param updatePeriod
 	 *            要设置的 updatePeriod，单位秒
 	 */
-	public void setUpdatePeriod(long updatePeriod) {
+	public void setUpdatePeriod(final long updatePeriod) {
 		this.updatePeriod = updatePeriod;
 	}
 
@@ -260,20 +262,32 @@ public class Planet implements Serializable {
 	 * @param editors
 	 *            要设置的 editors
 	 */
-	public void setEditors(Set<User> editors) {
+	public void setEditors(final Set<User> editors) {
 		this.editors = editors;
 	}
 
 	/* Public methods */
 
-	public void addSubscription(Subscription subscription) {
+	/**
+	 * Add a subscription.
+	 * 
+	 * @param subscription
+	 *            a subscription.
+	 */
+	public void addSubscription(final Subscription subscription) {
 		synchronized (subscriptions) {
 			log.debug("addSubscription called.");
 			this.subscriptions.add(subscription);
 		}
 	}
 
-	public void addEditor(User user) {
+	/**
+	 * Add an editor.
+	 * 
+	 * @param user
+	 *            an editor.
+	 */
+	public void addEditor(final User user) {
 		synchronized (editors) {
 			this.editors.add(user);
 		}

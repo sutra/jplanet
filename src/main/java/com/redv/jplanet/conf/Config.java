@@ -11,7 +11,12 @@ import com.redv.jplanet.Planet;
 import com.redv.jplanet.Subscription;
 
 /**
- * @author sutra
+ * Hold the config of JPlanet.
+ * <p>
+ * It is a singleton class.
+ * </p>
+ * 
+ * @author <a href="mailto:zhoushuqun@gmail.com">Sutra Zhou</a>
  * 
  */
 public class Config {
@@ -19,8 +24,13 @@ public class Config {
 
 	private static Config instance = new Config();
 
-	private Planet planet;
+	private final Planet planet;
 
+	/**
+	 * Get the instance of Config as Config is a singleton class.
+	 * 
+	 * @return the single instance of this class.
+	 */
 	public static Config getInstance() {
 		return instance;
 	}
@@ -46,10 +56,23 @@ public class Config {
 		}
 	}
 
-	public synchronized void save(Planet planet) throws Exception {
+	/**
+	 * Save the configration of planet by the config writer.
+	 * 
+	 * @param planet
+	 *            the planet to save.
+	 * @throws Exception
+	 *             exception while saving.
+	 */
+	public synchronized void save(final Planet planet) throws Exception {
 		Constants.getConfigWriter().write(planet);
 	}
 
+	/**
+	 * Get the configuration of planet by the config reader.
+	 * 
+	 * @return the model of planet.
+	 */
 	public Planet getPlanet() {
 		return planet;
 	}

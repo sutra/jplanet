@@ -3,11 +3,20 @@
  */
 package com.redv.jplanet;
 
+import java.io.Serializable;
+
 /**
- * @author sutra
+ * The model of user for JPlanet.
+ * 
+ * @author <a href="mailto:zhoushuqun@gmail.com">Sutra Zhou</a>
  * 
  */
-public class User {
+public class User implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4394663286825505355L;
+
 	private String openid;
 
 	/**
@@ -20,7 +29,7 @@ public class User {
 	/**
 	 * @param openid
 	 */
-	public User(String openid) {
+	public User(final String openid) {
 		super();
 		this.openid = openid;
 	}
@@ -36,7 +45,7 @@ public class User {
 	 * @param openid
 	 *            要设置的 openid
 	 */
-	public void setOpenid(String openid) {
+	public void setOpenid(final String openid) {
 		this.openid = openid;
 	}
 
@@ -59,7 +68,7 @@ public class User {
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)

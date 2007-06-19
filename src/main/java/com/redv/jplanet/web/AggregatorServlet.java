@@ -29,7 +29,25 @@ import com.sun.syndication.io.FeedException;
 import com.sun.syndication.io.SyndFeedOutput;
 
 /**
- * @author Sutra Zhou
+ * The main servlet of JPlanet, it display the aggregated feed on one page. It
+ * also deploy the fetcher thread by a timer. It should be load on startup.
+ * <p>
+ * You shoud define the serlvet in web.xml as this(attention the load-on-startup
+ * section, it should be positive integer):
+ * 
+ * <pre>
+ * &lt;servlet&gt;
+ * 		&lt;servlet-name&gt;aggregator&lt;/servlet-name&gt;
+ * 		&lt;servlet-class&gt;
+ * 			com.redv.jplanet.web.AggregatorServlet
+ * 		&lt;/servlet-class&gt;
+ * 		&lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+ *  &lt;/servlet&gt;
+ * </pre>
+ * 
+ * </p>
+ * 
+ * @author <a href="mailto:zhoushuqun@gmail.com">Sutra Zhou</a>
  * 
  */
 public class AggregatorServlet extends HttpServlet {

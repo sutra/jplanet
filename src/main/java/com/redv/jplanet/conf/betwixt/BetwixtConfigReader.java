@@ -17,8 +17,11 @@ import com.redv.jplanet.User;
 import com.redv.jplanet.conf.ConfigReader;
 
 /**
- * @author sutra
+ * The implemention of config reader with <a
+ * href="http://jakarta.apache.org/commons/betwixt/">Commons Betwixt</a>.
  * 
+ * @author <a href="mailto:zhoushuqun@gmail.com">Sutra Zhou</a>
+ * @see <a href="http://jakarta.apache.org/commons/betwixt/">Commons Betwixt</a>
  */
 public class BetwixtConfigReader implements ConfigReader {
 	private static final Log log = LogFactory.getLog(BetwixtConfigReader.class);

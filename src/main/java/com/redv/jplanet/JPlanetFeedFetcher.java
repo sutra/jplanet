@@ -24,7 +24,9 @@ import com.sun.syndication.fetcher.impl.HttpClientFeedFetcher;
 import com.sun.syndication.io.FeedException;
 
 /**
- * @author sutra
+ * The feed fetcher for JPlanet.
+ * 
+ * @author <a href="mailto:zhoushuqun@gmail.com">Sutra Zhou</a>
  * 
  */
 public class JPlanetFeedFetcher {
@@ -32,10 +34,22 @@ public class JPlanetFeedFetcher {
 
 	private Planet planet;
 
-	public JPlanetFeedFetcher(Planet planet) {
+	/**
+	 * 
+	 * @param planet
+	 *            the definition of planet.
+	 */
+	public JPlanetFeedFetcher(final Planet planet) {
 		this.planet = planet;
 	}
 
+	/**
+	 * Fetch all feeds.
+	 * 
+	 * @return the feed contents.
+	 * @throws JPlanetFetchException
+	 *             throw JPlanetFetchException while all feeds fetched failed.
+	 */
 	public List<FeedContent> fetchFeeds() throws JPlanetFetchException {
 		List<SyndEntry> fetchingSyndEntries = new ArrayList<SyndEntry>();
 		List<FeedContent> fetchingEntries = new ArrayList<FeedContent>();
@@ -61,8 +75,8 @@ public class JPlanetFeedFetcher {
 	}
 
 	@SuppressWarnings("unchecked")
-	private void retrieveFeed(List<SyndEntry> fetchingSyndEntries,
-			List<FeedContent> fetchingEntries, String feedUrl)
+	private void retrieveFeed(final List<SyndEntry> fetchingSyndEntries,
+			final List<FeedContent> fetchingEntries, final String feedUrl)
 			throws IllegalArgumentException, IOException, FeedException,
 			FetcherException {
 		FeedFetcherCache feedInfoCache = HashMapFeedInfoCache.getInstance();
@@ -95,7 +109,7 @@ public class JPlanetFeedFetcher {
 		}
 	}
 
-	private void sort(List<FeedContent> fetchingEntries) {
+	private void sort(final List<FeedContent> fetchingEntries) {
 		Collections.sort(fetchingEntries, new Comparator<FeedContent>() {
 
 			public int compare(FeedContent o1, FeedContent o2) {
