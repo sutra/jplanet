@@ -6,7 +6,9 @@ package com.redv.jplanet;
 import java.io.Serializable;
 
 /**
- * @author sutra
+ * The model of a subscription. It hold the title, feedUrl and the siteUrl.
+ * 
+ * @author <a href="mailto:zhoushuqun@gmail.com">Sutra Zhou</a>
  * 
  */
 public class Subscription implements Serializable {
@@ -35,7 +37,7 @@ public class Subscription implements Serializable {
 	 * @param feedUrl
 	 *            要设置的 feedUrl
 	 */
-	public void setFeedUrl(String feedUrl) {
+	public void setFeedUrl(final String feedUrl) {
 		this.feedUrl = feedUrl;
 	}
 
@@ -50,7 +52,7 @@ public class Subscription implements Serializable {
 	 * @param siteUrl
 	 *            要设置的 siteUrl
 	 */
-	public void setSiteUrl(String siteUrl) {
+	public void setSiteUrl(final String siteUrl) {
 		this.siteUrl = siteUrl;
 	}
 
@@ -65,7 +67,7 @@ public class Subscription implements Serializable {
 	 * @param title
 	 *            要设置的 title
 	 */
-	public void setTitle(String title) {
+	public void setTitle(final String title) {
 		this.title = title;
 	}
 
@@ -80,7 +82,7 @@ public class Subscription implements Serializable {
 	 * @param description
 	 *            要设置的 description
 	 */
-	public void setDescription(String description) {
+	public void setDescription(final String description) {
 		this.description = description;
 	}
 

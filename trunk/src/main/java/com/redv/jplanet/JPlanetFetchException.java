@@ -4,7 +4,9 @@
 package com.redv.jplanet;
 
 /**
- * @author sutra
+ * Exception while all feeds are fetched failed.
+ * 
+ * @author <a href="mailto:zhoushuqun@gmail.com">Sutra Zhou</a>
  * 
  */
 public class JPlanetFetchException extends Exception {

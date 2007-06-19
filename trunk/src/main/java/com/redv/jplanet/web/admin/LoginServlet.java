@@ -27,7 +27,9 @@ import com.redv.jplanet.User;
 import com.redv.jplanet.conf.Config;
 
 /**
- * @author sutra
+ * Process admin login.
+ * 
+ * @author <a href="mailto:zhoushuqun@gmail.com">Sutra Zhou</a>
  * 
  */
 public class LoginServlet extends HttpServlet {

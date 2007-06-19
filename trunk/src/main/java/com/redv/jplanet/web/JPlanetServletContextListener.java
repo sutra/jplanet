@@ -9,6 +9,9 @@ import javax.servlet.ServletContextListener;
 import com.redv.jplanet.conf.Config;
 
 /**
+ * The listener store the model of planet to the application scope named
+ * "planet".
+ * 
  * @author sutra
  * 
  */

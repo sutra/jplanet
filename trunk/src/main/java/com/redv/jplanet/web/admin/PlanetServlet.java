@@ -21,6 +21,15 @@ import com.redv.jplanet.User;
 import com.redv.jplanet.conf.Config;
 
 /**
+ * Process the configration get action and save action.
+ * <p>
+ * Hold the configration of definiation of planet page for
+ * administrators(editors).
+ * </p>
+ * <p>
+ * If a HTTP GET received, display.If a HTTP POST received, save it.
+ * </p>
+ * 
  * @author sutra
  * 
  */

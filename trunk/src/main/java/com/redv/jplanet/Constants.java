@@ -54,36 +54,36 @@ public class Constants {
 	}
 
 	/**
-	 * Return the data directory of configuration etc.
+	 * Get the data directory of configuration etc.
 	 * 
-	 * @return
+	 * @return the data directory of configuration etc.
 	 */
 	public static File getDataDir() {
 		return dataDir;
 	}
 
 	/**
-	 * Return the config timer (to refresh fetcher timer) period.
+	 * Get the config timer (to refresh fetcher timer) period.
 	 * 
-	 * @return
+	 * @return the config timer period.
 	 */
 	public static long getAggregatorConfigTimerPeriod() {
 		return aggregatorConfigTimerPeriod;
 	}
 
 	/**
-	 * Return config reader.
+	 * Get config reader.
 	 * 
-	 * @return
+	 * @return config reader.
 	 */
 	public static ConfigReader getConfigReader() {
 		return configReader;
 	}
 
 	/**
-	 * Return config writer.
+	 * Get config writer.
 	 * 
-	 * @return
+	 * @return config writer.
 	 */
 	public static ConfigWriter getConfigWriter() {
 		return configWriter;
