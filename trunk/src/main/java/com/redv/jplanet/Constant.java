@@ -15,7 +15,9 @@ import com.redv.jplanet.conf.ConfigReader;
 import com.redv.jplanet.conf.ConfigWriter;
 
 /**
- * @author sutra
+ * Constants for JPlanet.
+ * 
+ * @author Sutra Zhou
  * 
  */
 public class Constant {
@@ -51,18 +53,38 @@ public class Constant {
 		}
 	}
 
+	/**
+	 * Return the data directory of configuration etc.
+	 * 
+	 * @return
+	 */
 	public static File getDataDir() {
 		return dataDir;
 	}
 
+	/**
+	 * Return the config timer (to refresh fetcher timer) period.
+	 * 
+	 * @return
+	 */
 	public static long getAggregatorConfigTimerPeriod() {
 		return aggregatorConfigTimerPeriod;
 	}
 
+	/**
+	 * Return config reader.
+	 * 
+	 * @return
+	 */
 	public static ConfigReader getConfigReader() {
 		return configReader;
 	}
 
+	/**
+	 * Return config writer.
+	 * 
+	 * @return
+	 */
 	public static ConfigWriter getConfigWriter() {
 		return configWriter;
 	}
