@@ -32,7 +32,7 @@ public class Constant {
 	static {
 		Properties p = new Properties();
 		try {
-			p.load(Constant.class.getResourceAsStream("/planet.properties"));
+			p.load(Constant.class.getResourceAsStream("/jplanet.properties"));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
