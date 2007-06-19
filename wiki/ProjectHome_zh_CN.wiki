@@ -1,4 +1,4 @@
-#summary 项目首页。
+#summary 项目首页
 [http://code.google.com/p/jplanet/ English] | [http://code.google.com/p/jplanet/wiki/ProjectHome_zh_CN 中文（简体）]
 
 
@@ -29,7 +29,6 @@ mvn package war:war
 = 管理 =
  * 用浏览器打开 http://localhost:8080/jplanet/admin/
  * 用 [http://openid.net OpenID] 登录到后台
-
 
 
 
