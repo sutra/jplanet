@@ -10,7 +10,7 @@ import org.apache.commons.betwixt.io.BeanReader;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.redv.jplanet.Constant;
+import com.redv.jplanet.Constants;
 import com.redv.jplanet.Planet;
 import com.redv.jplanet.Subscription;
 import com.redv.jplanet.User;
@@ -42,7 +42,7 @@ public class BetwixtConfigReader implements ConfigReader {
 				"addSubscription");
 		reader.addSetNext("Planet/editors/editor", "addEditor");
 
-		File jplanetFile = new File(Constant.getDataDir(), "jplanet.xml");
+		File jplanetFile = new File(Constants.getDataDir(), "jplanet.xml");
 		try {
 			return (Planet) reader.parse(jplanetFile);
 		} catch (IOException e) {
