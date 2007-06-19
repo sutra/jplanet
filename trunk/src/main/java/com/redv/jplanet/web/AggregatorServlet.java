@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.redv.jplanet.Constant;
+import com.redv.jplanet.Constants;
 import com.redv.jplanet.FeedContent;
 import com.redv.jplanet.JPlanetFeedFetcher;
 import com.redv.jplanet.JPlanetFetchException;
@@ -65,7 +65,7 @@ public class AggregatorServlet extends HttpServlet {
 
 		this.jplanetFeedFetcher = new JPlanetFeedFetcher(planet);
 
-		configTimer.schedule(new ConfigTask(), 0, 1000 * 60 * Constant
+		configTimer.schedule(new ConfigTask(), 0, 1000 * 60 * Constants
 				.getAggregatorConfigTimerPeriod());
 	}
 

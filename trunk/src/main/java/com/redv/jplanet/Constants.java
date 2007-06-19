@@ -17,11 +17,11 @@ import com.redv.jplanet.conf.ConfigWriter;
 /**
  * Constants for JPlanet.
  * 
- * @author Sutra Zhou
+ * @author <a href="mailto:zhoushuqun@gmail.com">Sutra Zhou</a>
  * 
  */
-public class Constant {
-	private static final Log log = LogFactory.getLog(Constant.class);
+public class Constants {
+	private static final Log log = LogFactory.getLog(Constants.class);
 
 	private static File dataDir;
 
@@ -34,7 +34,7 @@ public class Constant {
 	static {
 		Properties p = new Properties();
 		try {
-			p.load(Constant.class.getResourceAsStream("/jplanet.properties"));
+			p.load(Constants.class.getResourceAsStream("/jplanet.properties"));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

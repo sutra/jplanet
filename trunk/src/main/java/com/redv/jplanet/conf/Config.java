@@ -6,7 +6,7 @@ package com.redv.jplanet.conf;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.redv.jplanet.Constant;
+import com.redv.jplanet.Constants;
 import com.redv.jplanet.Planet;
 import com.redv.jplanet.Subscription;
 
@@ -27,7 +27,7 @@ public class Config {
 
 	private Config() {
 		try {
-			planet = Constant.getConfigReader().read();
+			planet = Constants.getConfigReader().read();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -47,7 +47,7 @@ public class Config {
 	}
 
 	public synchronized void save(Planet planet) throws Exception {
-		Constant.getConfigWriter().write(planet);
+		Constants.getConfigWriter().write(planet);
 	}
 
 	public Planet getPlanet() {

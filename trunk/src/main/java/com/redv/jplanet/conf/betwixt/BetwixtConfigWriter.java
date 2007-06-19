@@ -10,7 +10,7 @@ import java.io.Writer;
 
 import org.apache.commons.betwixt.io.BeanWriter;
 
-import com.redv.jplanet.Constant;
+import com.redv.jplanet.Constants;
 import com.redv.jplanet.Planet;
 import com.redv.jplanet.conf.ConfigWriter;
 
@@ -27,7 +27,7 @@ public class BetwixtConfigWriter implements ConfigWriter {
 	 */
 	public synchronized void write(Planet planet) throws Exception {
 		Writer output = new OutputStreamWriter(new FileOutputStream(new File(
-				Constant.getDataDir(), "jplanet.xml")), "UTF-8");
+				Constants.getDataDir(), "jplanet.xml")), "UTF-8");
 		output.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 		try {
 			BeanWriter writer = new BeanWriter(output);
