@@ -86,4 +86,58 @@ public class Subscription implements Serializable {
 		this.description = description;
 	}
 
+	/*
+	 * （非 Javadoc）
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int PRIME = 31;
+		int result = 1;
+		result = PRIME * result
+				+ ((description == null) ? 0 : description.hashCode());
+		result = PRIME * result + ((feedUrl == null) ? 0 : feedUrl.hashCode());
+		result = PRIME * result + ((siteUrl == null) ? 0 : siteUrl.hashCode());
+		result = PRIME * result + ((title == null) ? 0 : title.hashCode());
+		return result;
+	}
+
+	/*
+	 * （非 Javadoc）
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final Subscription other = (Subscription) obj;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (feedUrl == null) {
+			if (other.feedUrl != null)
+				return false;
+		} else if (!feedUrl.equals(other.feedUrl))
+			return false;
+		if (siteUrl == null) {
+			if (other.siteUrl != null)
+				return false;
+		} else if (!siteUrl.equals(other.siteUrl))
+			return false;
+		if (title == null) {
+			if (other.title != null)
+				return false;
+		} else if (!title.equals(other.title))
+			return false;
+		return true;
+	}
+
 }
