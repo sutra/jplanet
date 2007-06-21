@@ -28,7 +28,7 @@ mvn package war:war
 
 = 管理 =
  * 用浏览器打开 http://localhost:8080/jplanet/admin/
- * 用 [http://openid.net OpenID] 登录到后台
+ * 用 [http://openid.net.cn OpenID] 登录到后台
 
 
 = 演示 =
