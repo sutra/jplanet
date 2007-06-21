@@ -74,70 +74,72 @@ function chkFrm() {
 </fieldset>
 
 <fieldset>
-<legend><fmt:message key="planet.editors" /></legend>
-<table>
-<thead>
-<tr>
-<th><fmt:message key="planet.editor.openid" /></th>
-</tr>
-</thead>
-<tbody id="editors">
-<c:forEach var="editor" items="${planet.editors}">
-<tr>
-<td><input type="text" name="editor.openid" class="text" size="100" value="${editor.openid}" /></td>
-</tr>
-</c:forEach>
-<tr>
-<td><input type="text" name="editor.openid" class="text" size="100" value="" /></td>
-</tr>
-</tbody>
-<tfoot>
-<tr>
-<td>
-<c:choose>
-<c:when test="${empty planet.editors}">
-<font color='red'>
-<fmt:message key="admin.editor.warning" />
-</font>
-</c:when>
-<c:otherwise><fmt:message key="admin.editor.warning" /></c:otherwise>
-</c:choose>
-</td>
-<td><input type="button" onclick="addOpenIdRow()" value="<fmt:message key="addRow" />" /></td>
-</tr>
-</tfoot>
-</table>
+	<legend><fmt:message key="planet.editors" /></legend>
+	<table style="width:100%;">
+		<thead>
+			<tr>
+				<th><fmt:message key="planet.editor.openid" /></th>
+			</tr>
+		</thead>
+		<tbody id="editors">
+			<c:forEach var="editor" items="${planet.editors}">
+			<tr>
+				<td><input type="text" name="editor.openid" class="text" style="width:100%;" value="${editor.openid}" /></td>
+			</tr>
+			</c:forEach>
+			<tr>
+				<td><input type="text" name="editor.openid" class="text" style="width:100%;" value="" /></td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td>
+					<input type="button" onclick="addOpenIdRow()" value="<fmt:message key="addRow" />" />
+					<c:choose>
+						<c:when test="${empty planet.editors}">
+							<font color='red'><fmt:message key="admin.editor.warning" /></font>
+						</c:when>
+						<c:otherwise><fmt:message key="admin.editor.warning" /></c:otherwise>
+					</c:choose>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
 </fieldset>
 
 <fieldset>
-<legend><fmt:message key="planet.subscriptions" /></legend>
-<table>
-<thead>
-<tr>
-<th><fmt:message key="planet.subscription.title" /></th>
-<th><fmt:message key="planet.subscription.feedUrl" /></th>
-<th><fmt:message key="planet.subscription.siteUrl" /></th>
-<th><fmt:message key="planet.subscription.description" /></th>
-</tr>
-</thead>
-<tbody id="subscriptions">
-<c:forEach var="subscription" items="${planet.subscriptions}">
-<tr>
-<td><input type="text" name="subscription.title" class="text" size="15" value="${subscription.title}" /></td>
-<td><input type="text" name="subscription.feedUrl" class="text" size="30" value="${subscription.feedUrl}" /></td>
-<td><input type="text" name="subscription.siteUrl" class="text" size="30" value="${subscription.siteUrl}" /></td>
-<td><input type="text" name="subscription.description" class="text" size="40" value="${subscription.description}" /></td>
-</tr>
-</c:forEach>
-<tr>
-<td><input type="text" name="subscription.title" class="text" size="15" value="" /></td>
-<td><input type="text" name="subscription.feedUrl" class="text" size="30" value="" /></td>
-<td><input type="text" name="subscription.siteUrl" class="text" size="30" value="" /></td>
-<td><input type="text" name="subscription.description" class="text" size="40" value="" /></td>
-</tr>
-</tbody>
-<tfoot><tr><td><input type="button" onclick="addSubscriptionRow()" value="<fmt:message key="addRow" />" /></td></tr></tfoot>
-</table>
+	<legend><fmt:message key="planet.subscriptions" /></legend>
+	<table style="width:100%;">
+		<thead>
+			<tr>
+				<th><fmt:message key="planet.subscription.title" /></th>
+				<th><fmt:message key="planet.subscription.feedUrl" /></th>
+				<th><fmt:message key="planet.subscription.siteUrl" /></th>
+				<th><fmt:message key="planet.subscription.description" /></th>
+			</tr>
+		</thead>
+		<tbody id="subscriptions">
+			<c:forEach var="subscription" items="${planet.subscriptions}">
+			<tr>
+				<td style="width:10%;"><input type="text" name="subscription.title" class="text" style="width:100%;" value="${subscription.title}" /></td>
+				<td style="width:25%;"><input type="text" name="subscription.feedUrl" class="text" style="width:100%;" value="${subscription.feedUrl}" /></td>
+				<td style="width:25%;"><input type="text" name="subscription.siteUrl" class="text" style="width:100%;" value="${subscription.siteUrl}" /></td>
+				<td style="width:40%;"><input type="text" name="subscription.description" class="text" style="width:100%;" value="${subscription.description}" /></td>
+			</tr>
+			</c:forEach>
+			<tr>
+				<td style="width:10%;"><input type="text" name="subscription.title" class="text" style="width:100%;" value="" /></td>
+				<td style="width:25%;"><input type="text" name="subscription.feedUrl" class="text" style="width:100%;" value="" /></td>
+				<td style="width:25%;"><input type="text" name="subscription.siteUrl" class="text" style="width:100%;" value="" /></td>
+				<td style="width:40%;"><input type="text" name="subscription.description" class="text" style="width:100%;" value="" /></td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td><input type="button" onclick="addSubscriptionRow()" value="<fmt:message key="addRow" />" /></td>
+			</tr>
+		</tfoot>
+	</table>
 </fieldset>
 
 <input type="submit" name="save" value="<fmt:message key="save" />" />
