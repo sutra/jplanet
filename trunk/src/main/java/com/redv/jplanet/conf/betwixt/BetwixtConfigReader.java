@@ -26,6 +26,16 @@ import com.redv.jplanet.conf.ConfigReader;
 public class BetwixtConfigReader implements ConfigReader {
 	private static final Log log = LogFactory.getLog(BetwixtConfigReader.class);
 
+	private final File jplanetFile;
+
+	public BetwixtConfigReader() {
+		jplanetFile = new File(Constants.getDataDir(), "jplanet.xml");
+	}
+
+	public BetwixtConfigReader(File jplanetFile) {
+		this.jplanetFile = jplanetFile;
+	}
+
 	/*
 	 * （非 Javadoc）
 	 * 
@@ -45,7 +55,6 @@ public class BetwixtConfigReader implements ConfigReader {
 				"addSubscription");
 		reader.addSetNext("Planet/editors/editor", "addEditor");
 
-		File jplanetFile = new File(Constants.getDataDir(), "jplanet.xml");
 		try {
 			return (Planet) reader.parse(jplanetFile);
 		} catch (IOException e) {

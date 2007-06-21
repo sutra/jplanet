@@ -22,6 +22,15 @@ import com.redv.jplanet.conf.ConfigWriter;
  * @see <a href="http://jakarta.apache.org/commons/betwixt/">Commons Betwixt</a>
  */
 public class BetwixtConfigWriter implements ConfigWriter {
+	private final File jplanetFile;
+
+	public BetwixtConfigWriter() {
+		jplanetFile = new File(Constants.getDataDir(), "jplanet.xml");
+	}
+
+	public BetwixtConfigWriter(File jplanetFile) {
+		this.jplanetFile = jplanetFile;
+	}
 
 	/*
 	 * （非 Javadoc）
@@ -29,8 +38,8 @@ public class BetwixtConfigWriter implements ConfigWriter {
 	 * @see com.redv.jplanet.conf.ConfigWriter#write(com.redv.jplanet.Planet)
 	 */
 	public synchronized void write(final Planet planet) throws Exception {
-		Writer output = new OutputStreamWriter(new FileOutputStream(new File(
-				Constants.getDataDir(), "jplanet.xml")), "UTF-8");
+		Writer output = new OutputStreamWriter(
+				new FileOutputStream(jplanetFile), "UTF-8");
 		output.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 		try {
 			BeanWriter writer = new BeanWriter(output);
@@ -40,5 +49,4 @@ public class BetwixtConfigWriter implements ConfigWriter {
 			output.close();
 		}
 	}
-
 }
