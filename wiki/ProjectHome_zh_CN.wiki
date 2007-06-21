@@ -31,6 +31,5 @@ mvn package war:war
  * 用 [http://openid.net OpenID] 登录到后台
 
 
-
-
-
+= 演示 =
+ * [http://planet.openid.net.cn/ OpenID 中文新闻聚合]
