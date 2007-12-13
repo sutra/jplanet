@@ -4,6 +4,8 @@
 package com.redv.jplanet;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -97,6 +99,19 @@ public class JPlanetFeedFetcher {
 					syndEntry.setDescription((SyndContent) syndEntry
 							.getContents().get(0));
 				}
+			}
+
+			// Normalize the link.
+			try {
+				log.debug("syndEntry.link: " + syndEntry.getLink());
+				if (!new URI(syndEntry.getLink()).isAbsolute()) {
+					syndEntry.setLink(inputUrl.toURI().resolve(
+							syndEntry.getLink()).normalize().toString());
+					log.debug("syndEntry.link(normalized): "
+							+ syndEntry.getLink());
+				}
+			} catch (URISyntaxException e) {
+				throw new IllegalArgumentException(e);
 			}
 
 			FeedContent fc = new FeedContent();

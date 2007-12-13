@@ -28,12 +28,12 @@
 			<div class="post">
 				<div class="post2">
 					<div class="post-header">
-						<h4 class="post-title"><a href="${entry.post.link}">${entry.post.title}</a></h4>
+						<h4 class="post-title"><a href="${entry.post.link}" onfocus="this.blur();">${entry.post.title}</a></h4>
 					</div>
 					<div class="post-contents"><p>${entry.description.value}</p></div>
 					<div class="post-footer">
 						<p>
-							<a href="${entry.post.link}">
+							<a href="${entry.post.link}" onfocus="this.blur();">
 								<fmt:formatDate value="${entry.datetime}" pattern="${planet.postDateFormat}" />
 							</a>
 						</p>
