@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title><decorator:title default="${planet.title}" /></title>
-<meta http-equiv="Content-Type"	content="application/xhtml-xml; charset=utf-8" />
+<meta http-equiv="Content-Type"	content="application/xhtml+xml; charset=UTF-8" />
 <meta content="all" name="robots" />
 
 <meta name="keywords" content="${planet.keywords}" />
