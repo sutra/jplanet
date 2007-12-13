@@ -19,6 +19,8 @@ public class User implements Serializable {
 
 	private String openid;
 
+	private String comment;
+
 	/**
 	 * 
 	 */
@@ -47,6 +49,21 @@ public class User implements Serializable {
 	 */
 	public void setOpenid(final String openid) {
 		this.openid = openid;
+	}
+
+	/**
+	 * @return comment
+	 */
+	public String getComment() {
+		return comment;
+	}
+
+	/**
+	 * @param comment
+	 *            要设置的 comment
+	 */
+	public void setComment(String description) {
+		this.comment = description;
 	}
 
 	/*

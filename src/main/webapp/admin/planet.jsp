@@ -30,6 +30,7 @@ function chkFrm() {
 	</div>
 </c:if>
 
+<%-- Site settings --%>
 <fieldset>
 <legend><fmt:message key="planet.site" /></legend>
 <dl>
@@ -48,6 +49,7 @@ function chkFrm() {
 </dl>
 </fieldset>
 
+<%-- Admin --%>
 <fieldset>
 <legend><fmt:message key="planet.admin" /></legend>
 <dl>
@@ -60,6 +62,7 @@ function chkFrm() {
 </dl>
 </fieldset>
 
+<%-- Dates settings --%>
 <fieldset>
 <legend><fmt:message key="date" /></legend>
 <dl>
@@ -73,27 +76,31 @@ function chkFrm() {
 </dl>
 </fieldset>
 
+<%-- editors --%>
 <fieldset>
 	<legend><fmt:message key="planet.editors" /></legend>
 	<table style="width:100%;">
 		<thead>
 			<tr>
 				<th><fmt:message key="planet.editor.openid" /></th>
+				<th><fmt:message key="planet.editor.comment" /></th>
 			</tr>
 		</thead>
 		<tbody id="editors">
 			<c:forEach var="editor" items="${planet.editors}">
 			<tr>
-				<td><input type="text" name="editor.openid" class="text" style="width:100%;" value="${editor.openid}" /></td>
+				<td style="width:50%;"><input type="text" name="editor.openid" class="text" style="width:100%;" value="${editor.openid}" /></td>
+				<td><input type="text" name="editor.comment" class="text" style="width:100%;" value="${editor.comment}" /></td>
 			</tr>
 			</c:forEach>
 			<tr>
-				<td><input type="text" name="editor.openid" class="text" style="width:100%;" value="" /></td>
+				<td style="width:50%;"><input type="text" name="editor.openid" class="text" style="width:100%;" value="" /></td>
+				<td><input type="text" name="editor.comment" class="text" style="width:100%;" value="" /></td>
 			</tr>
 		</tbody>
 		<tfoot>
 			<tr>
-				<td>
+				<td colspan="2">
 					<input type="button" onclick="addOpenIdRow()" value="<fmt:message key="addRow" />" />
 					<c:choose>
 						<c:when test="${empty planet.editors}">
@@ -107,6 +114,7 @@ function chkFrm() {
 	</table>
 </fieldset>
 
+<%-- Subscriptions --%>
 <fieldset>
 	<legend><fmt:message key="planet.subscriptions" /></legend>
 	<table style="width:100%;">

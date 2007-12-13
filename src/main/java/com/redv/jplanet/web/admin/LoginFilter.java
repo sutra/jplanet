@@ -59,7 +59,7 @@ public class LoginFilter implements Filter {
 			if (log.isDebugEnabled()) {
 				log.debug("not logged in.");
 			}
-			resp.sendRedirect("login.jsp");
+			resp.sendRedirect(req.getContextPath() + "/admin/login.jsp");
 		} else {
 			if (log.isDebugEnabled()) {
 				User editor = (User) req.getSession().getAttribute("editor");
