@@ -99,6 +99,7 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	// --- placing the authentication request ---
+	@SuppressWarnings("unchecked")
 	public String authRequest(String userSuppliedString,
 			HttpServletRequest httpReq, HttpServletResponse httpResp)
 			throws IOException, ServletException {
