@@ -6,6 +6,7 @@ package com.redv.jplanet.web.admin;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -100,7 +101,7 @@ public class LoginServlet extends HttpServlet {
 	// --- placing the authentication request ---
 	public String authRequest(String userSuppliedString,
 			HttpServletRequest httpReq, HttpServletResponse httpResp)
-			throws IOException {
+			throws IOException, ServletException {
 		try {
 			// configure the return_to URL where your application will
 			// receive
@@ -140,13 +141,11 @@ public class LoginServlet extends HttpServlet {
 			} else {
 				// Option 2: HTML FORM Redirection (Allows payloads >2048 bytes)
 
-				// RequestDispatcher dispatcher =
-				// getServletContext().getRequestDispatcher("formredirection.jsp");
-				// httpReq.setAttribute("prameterMap",
-				// response.getParameterMap());
-				// httpReq.setAttribute("destinationUrl",
-				// response.getDestinationUrl(false));
-				// dispatcher.forward(request, response);
+				RequestDispatcher dispatcher = getServletContext()
+						.getRequestDispatcher("/admin/formredirection.jsp");
+				httpReq.setAttribute("prameterMap", httpReq.getParameterMap());
+				httpReq.setAttribute("message", authReq);
+				dispatcher.forward(httpReq, httpResp);
 			}
 		} catch (OpenIDException e) {
 			// present error to the user
