@@ -23,11 +23,11 @@ mvn package war:war
 = 安装 =
 
  * 复制 jplanet.war 到 Tomcat 等的 webapps 目录下
- * 用浏览器浏览 http://localhost:8080/jplanet/
+ * 用浏览器浏览 `http://localhost:8080/jplanet/`
 
 
 = 管理 =
- * 用浏览器打开 http://localhost:8080/jplanet/admin/
+ * 用浏览器打开 `http://localhost:8080/jplanet/admin/`
  * 用 [http://openid.net.cn OpenID] 登录到后台
 
 
