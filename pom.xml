@@ -5,7 +5,7 @@
 	<groupId>com.redv.jplanet</groupId>
 	<artifactId>jplanet</artifactId>
 	<packaging>war</packaging>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>jplanet</name>
 	<description>
 		JPlanet is an awesome 'river of news' feed reader. It downloads
@@ -161,7 +161,6 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>jplanet</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
