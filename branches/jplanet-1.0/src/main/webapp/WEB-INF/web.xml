@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>JPlanet</display-name>
+	<!-- Define the basename for a resource bundle for I18N -->
+	<context-param>
+		<param-name>
+			javax.servlet.jsp.jstl.fmt.localizationContext
+		</param-name>
+		<param-value>ApplicationResources</param-value>
+	</context-param>
+	<!-- Fallback locale if no bundles found for browser's preferred locale -->
+	<!-- Force a single locale using param-name 'javax.servlet.jsp.jstl.fmt.locale' -->
+	<context-param>
+		<param-name>
+			javax.servlet.jsp.jstl.fmt.fallbackLocale
+		</param-name>
+		<param-value>zh</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>
+			com.redv.jplanet.web.JPlanetServletContextListener
+		</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>aggregator</servlet-name>
+		<servlet-class>
+			com.redv.jplanet.web.AggregatorServlet
+		</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>/admin/login</servlet-name>
+		<servlet-class>
+			com.redv.jplanet.web.admin.LoginServlet
+		</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>/admin/logout</servlet-name>
+		<servlet-class>
+			com.redv.jplanet.web.admin.LogoutServlet
+		</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>/admin/planet</servlet-name>
+		<servlet-class>
+			com.redv.jplanet.web.admin.PlanetServlet
+		</servlet-class>
+	</servlet>
+	<filter>
+		<display-name>Set Character Encoding Filter</display-name>
+		<filter-name>Set Character Encoding Filter</filter-name>
+		<filter-class>
+			org.springframework.web.filter.CharacterEncodingFilter
+		</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter>
+		<filter-name>UrlRewriteFilter</filter-name>
+		<filter-class>
+			org.tuckey.web.filters.urlrewrite.UrlRewriteFilter
+		</filter-class>
+	</filter>
+	<filter>
+		<filter-name>LoginFilter</filter-name>
+		<filter-class>com.redv.jplanet.web.admin.LoginFilter</filter-class>
+	</filter>
+	<filter>
+		<filter-name>sitemesh</filter-name>
+		<filter-class>
+			com.opensymphony.module.sitemesh.filter.PageFilter
+		</filter-class>
+	</filter>
+
+	<servlet-mapping>
+		<servlet-name>aggregator</servlet-name>
+		<url-pattern>/aggregator</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>/admin/login</servlet-name>
+		<url-pattern>/admin/login</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>/admin/logout</servlet-name>
+		<url-pattern>/admin/logout</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>/admin/planet</servlet-name>
+		<url-pattern>/admin/planet</url-pattern>
+	</servlet-mapping>
+
+	<filter-mapping>
+		<filter-name>Set Character Encoding Filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>UrlRewriteFilter</filter-name>
+		<url-pattern>/rss</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>UrlRewriteFilter</filter-name>
+		<url-pattern>/atom</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>UrlRewriteFilter</filter-name>
+		<url-pattern>*.xml</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
+		<servlet-name>/admin/planet</servlet-name>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>sitemesh</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+</web-app>
