@@ -1,10 +1,17 @@
 input.text {
 	border: 1px solid silver;
 }
+
 textarea.text {
 	border: 1px solid silver;
 }
+
 .text:hover {
 	background-color: #ffd;
 	border: 1px solid rgb(255, 128, 128);
+}
+
+.tip {
+	font-style: italic;
+	font-size: small;
 }

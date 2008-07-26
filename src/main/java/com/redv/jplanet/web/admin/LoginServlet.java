@@ -75,7 +75,7 @@ public class LoginServlet extends HttpServlet {
 				resp.sendRedirect("planet");
 				ok = true;
 			} else {
-				req.setAttribute("openid_url", editor.getOpenid());
+				req.setAttribute("openid_identifier", editor.getOpenid());
 				req.setAttribute("error", "error.NOT_EDITOR");
 			}
 		}
@@ -94,8 +94,9 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		String openid_url = req.getParameter("openid_url");
-		this.authRequest(openid_url, req, resp);
+		String openid_identifier = req.getParameter("openid_identifier");
+		req.setAttribute("openid_identifier", openid_identifier);
+		this.authRequest(openid_identifier, req, resp);
 	}
 
 	// --- placing the authentication request ---
@@ -150,7 +151,10 @@ public class LoginServlet extends HttpServlet {
 			}
 		} catch (OpenIDException e) {
 			// present error to the user
-			httpResp.getWriter().write("Error: " + e.getMessage());
+			// httpResp.getWriter().write("Error: " + e.getMessage());
+			httpReq.setAttribute("openIDException", e);
+			this.getServletContext().getRequestDispatcher("/admin/login.jsp")
+					.forward(httpReq, httpResp);
 		}
 
 		return null;
